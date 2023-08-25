@@ -1,0 +1,15 @@
+/* Variables and mixins declared here will be available in all other SCSS files */
+$white: #f6f6f6;
+
+$theme-colors: (
+	'light': #2e51a2,
+	'dark': #444444,
+	'primary': #2e51a2,
+	'secondary': #444444,
+	'info': #24a4ae,
+	'success': #0f9b59,
+	'warning': #dfc911,
+	'danger': #ed1a06
+);
+
+@import '/node_modules/bootstrap/scss/bootstrap.scss';

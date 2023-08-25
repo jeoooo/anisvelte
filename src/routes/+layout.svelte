@@ -1,249 +1,233 @@
 <script>
-  import { AppShell } from "@skeletonlabs/skeleton";
-  import { AppBar } from "@skeletonlabs/skeleton";
-
-  import {
-    IconSearch,
-    IconBrandFacebookFilled,
-    IconBrandTwitterFilled,
-    IconBrandInstagram,
-    IconBrandDiscordFilled,
-  } from "@tabler/icons-svelte";
-
-  // Your custom Skeleton theme:
-  import "../theme.postcss";
-
-  // This contains the bulk of Skeletons required styles:
-  import "@skeletonlabs/skeleton/styles/skeleton.css";
-
-  // Finally, your application's global stylesheet (sometimes labeled 'app.css')
-  import "../app.postcss";
+	import '../app.scss';
 </script>
 
-<AppShell>
-  <svelte:fragment slot="header">
-    <AppBar class="h-14">
-      <div
-        class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl"
-      >
-        <a href="#mal" class="flex items-center ml-32 -mt-3">
-          <img
-            src="https://store-images.s-microsoft.com/image/apps.17083.9007199266506523.adab9a45-6875-4ea0-b145-00abf7f7d397.abfcc7db-df11-4314-a62f-a302f0c4a286"
-            class="mr-3 h-6 sm:h-14"
-            alt="Flowbite Logo"
-          />
-        </a>
-        <div class="flex items-center lg:order-2" />
-        <div
-          class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-          id="mobile-menu-2"
-          style="margin-top: -20px"
-        >
-          <ul
-            class="flex flex-col -mt-36 font-medium lg:flex-row lg:space-x-4 lg:mt-0 ml-6"
-          >
-            <li>
-              <a
-                href="#test"
-                class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                aria-current="page"
-              >
-                Anime
-              </a>
-            </li>
-            <li>
-              <a
-                href="#test"
-                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Manga
-              </a>
-            </li>
-            <li>
-              <a
-                href="#test"
-                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Community
-              </a>
-            </li>
-            <li>
-              <a
-                href="#test"
-                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Industry
-              </a>
-            </li>
-            <li>
-              <a
-                href="#test"
-                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Watch
-              </a>
-            </li>
-            <li>
-              <a
-                href="#test"
-                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Read
-              </a>
-            </li>
-            <li>
-              <a
-                href="#test"
-                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Help
-              </a>
-            </li>
-          </ul>
+<header>
+	<nav class="navbar navbar-expand-lg bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#test">
+				<img
+					src="https://store-images.s-microsoft.com/image/apps.17083.9007199266506523.adab9a45-6875-4ea0-b145-00abf7f7d397.abfcc7db-df11-4314-a62f-a302f0c4a286"
+					height="46"
+					alt="MAL logo"
+				/>
+			</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon" />
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle text-white"
+							href="#anime"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">Anime</a
+						>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#anime-search">Anime Search</a></li>
+							<li><a class="dropdown-item" href="#top-anime">Top Anime</a></li>
+							<li><a class="dropdown-item" href="#seasonal-anime">Seasonal Anime</a></li>
+							<li><a class="dropdown-item" href="#videos">Videos</a></li>
+							<li><a class="dropdown-item" href="#anime-reviews">Reviews</a></li>
+							<li><a class="dropdown-item" href="#anime-recommendations">Recommendations</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle text-white"
+							href="#manga"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">Manga</a
+						>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#manga-search">Manga Search</a></li>
+							<li><a class="dropdown-item" href="#top-manga">Top Manga</a></li>
+							<li><a class="dropdown-item" href="#manga-store">Manga Store</a></li>
+							<li><a class="dropdown-item" href="#manga-reviews">Reviews</a></li>
+							<li><a class="dropdown-item" href="#manga-recommendations">Recommendations</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle text-white"
+							href="#community"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">Community</a
+						>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#interest-stacks">Interest Stacks</a></li>
+							<li><a class="dropdown-item" href="#forums">Forums</a></li>
+							<li><a class="dropdown-item" href="#clubs">Clubs</a></li>
+							<li><a class="dropdown-item" href="#blogs">Blogs</a></li>
+							<li><a class="dropdown-item" href="#users">Users</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle text-white"
+							href="#industry"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">Industry</a
+						>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#news">News</a></li>
+							<li><a class="dropdown-item" href="#featured-articles">Featured Articles</a></li>
+							<li><a class="dropdown-item" href="#people">People</a></li>
+							<li><a class="dropdown-item" href="#characters">Characters</a></li>
+							<li><a class="dropdown-item" href="#companies">Companies</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle text-white"
+							href="#watch"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">Watch</a
+						>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#episode-videos">Episode Videos</a></li>
+							<li><a class="dropdown-item" href="#anime-trailers">Anime Trailers</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle text-white"
+							href="#read"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">Read</a
+						>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#manga-store">Manga Store</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle text-white"
+							href="#help"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">Help</a
+						>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#about">About</a></li>
+							<li><a class="dropdown-item" href="#support">Support</a></li>
+							<li><a class="dropdown-item" href="#advertising">Advertising</a></li>
+							<li><a class="dropdown-item" href="#faq">FAQ</a></li>
+							<li><a class="dropdown-item" href="#report">Report</a></li>
+							<li><a class="dropdown-item" href="#staff">Staff</a></li>
+						</ul>
+					</li>
+				</ul>
 
-          <select class="select ml-6 h-8 text-xs rounded-s-lg rounded-e-lg">
-            <option value="1">All</option>
-            <option value="2">Anime</option>
-            <option value="3">Manga</option>
-            <option value="4">Characters</option>
-            <option value="5">People</option>
-            <option value="5">Companies</option>
-            <option value="5">Manga Store</option>
-            <option value="5">News</option>
-            <option value="5">Featured Articles</option>
-            <option value="5">Forum</option>
-            <option value="5">Clubs</option>
-            <option value="5">Users</option>
-          </select>
+				<div class="dropdown" style="margin-right: 6px;">
+					<button
+						class="btn btn-secondary dropdown-toggle"
+						type="button"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+						style="width: 100px;">All</button
+					>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#test">All</a></li>
+						<li><a class="dropdown-item" href="#test">Anime</a></li>
+						<li><a class="dropdown-item" href="#test">Manga</a></li>
+						<li><a class="dropdown-item" href="#test">Characters</a></li>
+						<li><a class="dropdown-item" href="#test">People</a></li>
+						<li><a class="dropdown-item" href="#test">Companies</a></li>
+						<li><a class="dropdown-item" href="#test">Manga Store</a></li>
+						<li><a class="dropdown-item" href="#test">News</a></li>
+						<li><a class="dropdown-item" href="#test">Featured Articles</a></li>
+						<li><a class="dropdown-item" href="#test">Forum</a></li>
+						<li><a class="dropdown-item" href="#test">Clubs</a></li>
+						<li><a class="dropdown-item" href="#test">Users</a></li>
+					</ul>
+				</div>
 
-          <input
-            class="input h-8 text-xs ml-1 rounded-s-lg rounded-e-lg w-40"
-            title="Input (search)"
-            type="search"
-            placeholder="Search MAL..."
-          />
+				<form class="d-flex" role="search">
+					<input
+						class="form-control me-2"
+						type="search"
+						placeholder="Search Anime, Manga and More..."
+						aria-label="Search"
+						style="width: 300px;"
+					/>
+					<button class="btn btn-secondary" type="submit" style="margin-right: 20px;">
+						<i class="bi bi-search" />
+					</button>
+				</form>
+				<button
+					type="button"
+					class="btn btn-secondary"
+					data-svelte-h="svelte-1q4xhlk"
+					style="margin-right: 10px; width: 100px"
+					>Login
+				</button>
+				<button type="button" class="btn btn-light" style="margin-right: 60px; width: 100px;"
+					>Sign Up</button
+				>
+			</div>
+		</div>
+	</nav>
+</header>
+<slot />
 
-          <button
-            type="button"
-            class="btn btn-sm ml-1 variant-filled rounded-l-lg rounded-r-lg"
-          >
-            <span><IconSearch size={20} /></span>
-            <span>Search</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-sm ml-1 variant-secondary rounded-l-lg rounded-r-lg"
-          >
-            <span>Sign Up</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-sm ml-1 variant-filled rounded-l-lg rounded-r-lg"
-          >
-            <span>Login</span>
-          </button>
-        </div>
-      </div>
-    </AppBar>
-  </svelte:fragment>
-  <slot />
-  <svelte:fragment slot="footer">
-    <footer class="">
-      <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-        <hr
-          class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"
-        />
-        <div class="sm:flex sm:items-center sm:justify-between">
-          <ul
-            class="flex flex-wrap items-center text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400"
-          >
-            <li>
-              <a href="#test" class="mr-32">
-                <IconBrandFacebookFilled />
-              </a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 md:mr-32">
-                <IconBrandInstagram />
-              </a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 md:mr-32">
-                <IconBrandTwitterFilled />
-              </a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 md:mr-32">
-                <IconBrandDiscordFilled />
-              </a>
-            </li>
-          </ul>
-          <img
-            src="https://icon-library.com/images/google-play-store-icon-download/google-play-store-icon-download-6.jpg"
-            class="h-16 ml-96"
-            alt="MAL Logo"
-          />
-          <img
-            src="https://icon-library.com/images/apple-store-icon/apple-store-icon-4.jpg"
-            class="h-16"
-            alt="MAL Logo"
-          />
-        </div>
-        <hr
-          class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"
-        />
-        <div class="sm:flex sm:items-center sm:justify-between">
-          <img
-            src="https://store-images.s-microsoft.com/image/apps.17083.9007199266506523.adab9a45-6875-4ea0-b145-00abf7f7d397.abfcc7db-df11-4314-a62f-a302f0c4a286"
-            class="h-16 mr-6"
-            alt="MAL Logo"
-          />
-          <ul
-            class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400"
-          >
-            <li>
-              <a href="#test" class="mr-4 hover:underline md:mr-6"> About </a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 hover:underline md:mr-6">
-                Press Room
-              </a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 hover:underline md:mr-6"> Support </a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 hover:underline md:mr-6"
-                >Advertising</a
-              >
-            </li>
-            <li>
-              <a href="#test" class="mr-4 hover:underline md:mr-6">FAQ</a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 hover:underline md:mr-6">Terms</a>
-            </li>
-            <li>
-              <a href="#test" class="mr-4 hover:underline md:mr-6"
-                >Privacy Policy</a
-              >
-            </li>
-            <li>
-              <a href="#test" class="hover:underline">Sitemap</a>
-            </li>
-          </ul>
-        </div>
-        <hr
-          class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"
-        />
-        <span
-          class="block text-sm text-gray-500 sm:text-center dark:text-gray-400"
-        >
-          <a href="https://flowbite.com/" class="hover:underline"
-            >MyAnimeList.net</a
-          > is a property of MyAnimeList Co.,Ltd. © 2023 All Rights Reserved.</span
-        >
-      </div>
-    </footer>
-  </svelte:fragment>
-</AppShell>
+<footer class="py-3 my-4 bg-primary border-bottom pb-3 mb-3">
+	<ul class="nav justify-content-center pb-3 mb-3">
+		<li class="nav-item"><a href="#test" class="nav-link px-2 text-white">Home</a></li>
+		<li class="nav-item">
+			<a href="#test" class="nav-link px-2 text-white">Features</a>
+		</li>
+		<li class="nav-item">
+			<a href="#test" class="nav-link px-2 text-white">Pricing</a>
+		</li>
+		<li class="nav-item"><a href="#test" class="nav-link px-2 text-white">FAQs</a></li>
+		<li class="nav-item"><a href="#test" class="nav-link px-2 text-white">About</a></li>
+	</ul>
+
+	<p class="text-center text-white">
+		MyAnimeList.net is a property of MyAnimeList Co.,Ltd. ©2023 All Rights Reserved.
+	</p>
+
+	<div class="col-md-4 d-flex align-items-center justify-content-between">
+		<div class="ms-3">
+			<img
+				src="https://store-images.s-microsoft.com/image/apps.17083.9007199266506523.adab9a45-6875-4ea0-b145-00abf7f7d397.abfcc7db-df11-4314-a62f-a302f0c4a286"
+				height="66"
+				alt="MAL logo"
+				style="margin-left: 100%;"
+			/>
+		</div>
+		<ul
+			class="nav col-md-8 justify-content-end list-unstyled d-flex me-3"
+			style="margin-left: 170%;"
+		>
+			<li class="ms-3">
+				<a class="text-body-secondary" href="#test"><i class="bi bi-facebook" /></a>
+			</li>
+			<li class="ms-3">
+				<a class="text-body-secondary" href="#test"><i class="bi bi-twitter" /></a>
+			</li>
+			<li class="ms-3">
+				<a class="text-body-secondary" href="#test"><i class="bi bi-instagram" /></a>
+			</li>
+			<li class="ms-3">
+				<a class="text-body-secondary" href="#test"><i class="bi bi-discord" /></a>
+			</li>
+		</ul>
+	</div>
+</footer>
