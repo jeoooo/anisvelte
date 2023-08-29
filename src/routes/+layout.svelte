@@ -58,7 +58,7 @@
 							<li><a class="dropdown-item" href="#manga-recommendations">Recommendations</a></li>
 						</ul>
 					</li>
-					<li class="nav-item dropdown">
+					<!-- <li class="nav-item dropdown">
 						<a
 							class="nav-link dropdown-toggle text-white"
 							href="#community"
@@ -73,7 +73,7 @@
 							<li><a class="dropdown-item" href="#blogs">Blogs</a></li>
 							<li><a class="dropdown-item" href="#users">Users</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<li class="nav-item dropdown">
 						<a
 							class="nav-link dropdown-toggle text-white"
@@ -103,7 +103,7 @@
 							<li><a class="dropdown-item" href="#anime-trailers">Anime Trailers</a></li>
 						</ul>
 					</li>
-					<li class="nav-item dropdown">
+					<!-- <li class="nav-item dropdown">
 						<a
 							class="nav-link dropdown-toggle text-white"
 							href="#read"
@@ -114,7 +114,7 @@
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="#manga-store">Manga Store</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<li class="nav-item dropdown">
 						<a
 							class="nav-link dropdown-toggle text-white"
@@ -170,7 +170,7 @@
 						<i class="bi bi-search" />
 					</button>
 				</form>
-				<button
+				<!-- <button
 					type="button"
 					class="btn btn-secondary"
 					data-svelte-h="svelte-1q4xhlk"
@@ -179,14 +179,14 @@
 				</button>
 				<button type="button" class="btn btn-light" style="margin-right: 60px; width: 100px;"
 					>Sign Up</button
-				>
+				> -->
 			</div>
 		</div>
 	</nav>
 </header>
 <slot />
 
-<footer class="py-3 my-4 bg-primary border-bottom pb-3 mb-3">
+<footer class="py-3 bg-primary border-bottom pb-3">
 	<ul class="nav justify-content-center pb-3 mb-3">
 		<li class="nav-item"><a href="#test" class="nav-link px-2 text-white">Home</a></li>
 		<li class="nav-item">

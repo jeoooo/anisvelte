@@ -1,81 +1,80 @@
 <script lang="ts">
-	export let animeTitle: string = 'Jujutsu Kaisen'; // Example title
-
-	let isHovered: boolean = false;
-
-	function toggleHover() {
-		isHovered = !isHovered;
-	}
 </script>
 
-<div class="row row-cols-5">
-	<div class="col-md-2 pl-0 pr-0">
-		<!-- Added pl-0 and pr-0 classes -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div
-			class="card card-cover overflow-hidden text-bg-dark rounded-4 shadow-lg card-hover"
-			style="position: relative; width: 160px; height: 220px; background-image: url('https://cdn.myanimelist.net/images/anime/1792/138022.jpg'); background-size: cover; margin-top: 200%;"
-			on:mouseenter={toggleHover}
-			on:mouseleave={toggleHover}
-		>
-			<!-- Gradient Overlay -->
-			{#if isHovered}
-				<div class="gradient-overlay" />
-			{/if}
-
-			<!-- Title Text -->
-			<div class="title-text-bottom-left">
-				<p style="font-weight: bold;">{animeTitle}</p>
-			</div>
-
-			<!-- Description Text (Initially Hidden) -->
-			<!-- <div class="description-text">
-		            <p>{animeDescription}</p>
-		        </div> -->
+<div class="card-container">
+	<div class="card">
+		<img
+			src="https://cdn.myanimelist.net/images/anime/1792/138022.jpg"
+			class="card-img"
+			alt="..."
+		/>
+		<div class="gradient-overlay" />
+		<div class="card-title-overlay d-flex flex-column justify-content-end">
+			<h5 class="card-title">Anime Title</h5>
 		</div>
 	</div>
-	<!-- Add more col-md-2 elements for other cards -->
 </div>
 
 <style>
-	.col-md-2 {
-		flex-basis: calc(20% - 15px); /* Adjusted flex-basis */
-		margin-right: 5px; /* Reduced right margin */
-		margin-bottom: 1rem;
+	.card-container {
+		width: 187.5px;
+		height: 260.4px;
+		margin: 4px;
 	}
 
-	.card-hover {
+	.card {
 		position: relative;
+		transition: transform 0.3s;
+		width: 100%;
+		height: 100%;
+		border-radius: 10px;
 		overflow: hidden;
-		transition: transform 0.3s ease-in-out;
 	}
 
-	.card-hover:hover {
-		transform: scale(1.05); /* Slight scale increase on hover */
+	.card:hover {
+		transform: scale(1.05);
 	}
 
-	.card-hover .gradient-overlay {
+	.gradient-overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-image: linear-gradient(to bottom, transparent, #000000);
-		opacity: 0; /* Initial opacity set to 0 */
-		transition: opacity 0.3s ease-in-out;
+		background: linear-gradient(to bottom, transparent, black);
+		opacity: 0.7;
+		z-index: 1;
+		border-radius: 10px;
 	}
 
-	.card-hover:hover .gradient-overlay,
-	.card-hover:hover .title-text-bottom-left {
-		opacity: 0.8;
+	.card-img {
+		position: relative;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 10px;
 	}
 
-	.title-text-bottom-left {
+	.card-title-overlay {
 		position: absolute;
-		bottom: 10px;
-		left: 10px;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 2;
+	}
+
+	.card-title {
+		opacity: 1;
+		transition: opacity 0.3s;
+		padding: 0px;
+		padding-left: 10px;
+		padding-bottom: 4px;
+		border-radius: 0 0 15px 15px;
 		color: white;
-		opacity: 0; /* Initial opacity set to 0 */
-		transition: opacity 0.3s ease-in-out;
+	}
+
+	.card:hover .card-title {
+		opacity: 1;
 	}
 </style>
