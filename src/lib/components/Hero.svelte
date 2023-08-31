@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4 mb-4">
 	<div class="hero">
 		<div class="hero-text p-2" style="max-height: 250px;">
 			<div class="heading">
