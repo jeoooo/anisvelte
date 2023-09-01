@@ -1,16 +1,14 @@
 <script lang="ts">
+	export let latest_seasonal_anime_title = 'Anime Title'; // default value
+	export let latest_seasonal_anime_img = 'https://cdn.myanimelist.net/images/anime/1792/138022.jpg';
 </script>
 
 <div class="card-container">
 	<div class="card">
-		<img
-			src="https://cdn.myanimelist.net/images/anime/1792/138022.jpg"
-			class="card-img"
-			alt="..."
-		/>
+		<img src={latest_seasonal_anime_img} class="card-img" alt={latest_seasonal_anime_title} />
 		<div class="gradient-overlay" />
 		<div class="card-title-overlay d-flex flex-column justify-content-end">
-			<h6 class="card-title">Anime Title</h6>
+			<h6 class="card-title">{latest_seasonal_anime_title}</h6>
 		</div>
 	</div>
 </div>

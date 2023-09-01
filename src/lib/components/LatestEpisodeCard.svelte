@@ -1,21 +1,24 @@
 <script lang="ts">
+	export let latest_episode_anime_title = 'Latest Anime Title';
+	export let latest_episode_anime_img = 'https://cdn.myanimelist.net/images/anime/1384/136408.jpg';
+	export let latest_episode_anime_episode = 'Episode #';
 </script>
 
 <div class="card-container">
 	<div class="card">
-		<img
-			src="https://cdn.myanimelist.net/images/anime/1384/136408.jpg"
-			class="card-img"
-			alt="..."
-		/>
+		<img src={latest_episode_anime_img} class="card-img" alt="..." />
 		<div class="gradient-overlay" />
 		<div class="card-title-overlay d-flex flex-column justify-content-end">
-			<h6 class="card-title">Anime Title</h6>
+			<h6 class="card-title">
+				{latest_episode_anime_title}
+			</h6>
 		</div>
-		<div class="badge bg-success" style="position: absolute; top: 8px; left: 6px;">Episode #</div>
-		<div class="badge bg-warning text-black" style="position: absolute; top: 32px; left: 6px;">
-			Season #
+		<div class="badge bg-success" style="position: absolute; top: 8px; left: 6px;">
+			{latest_episode_anime_episode}
 		</div>
+		<!-- <div class="badge bg-warning text-black" style="position: absolute; top: 32px; left: 6px;">
+			{latest_episode_anime_season}
+		</div> -->
 	</div>
 </div>
 
