@@ -1,17 +1,19 @@
 <script lang="ts">
-	let rankingNumber: number = 1; // Replace with the actual ranking number
-	let animeTitle: string = 'Anime Title'; // Replace with your anime title
-	let animeDetails: string = 'Studio: Studio Name'; // Replace with your anime details
+	export let popular_anime_all_time_ranking: number = 1; // Replace with the actual ranking number
+	export let popular_anime_all_time_title: string = 'Anime Title'; // Replace with your anime title
+	export let popular_anime_all_time_studio: string = 'Studio Name'; // Replace with your anime details
+	export let popular_anime_all_time_img: string =
+		'https://cdn.myanimelist.net/images/anime/1188/136926.jpg';
 </script>
 
 <div class="card mb-2 bg-primary">
 	<div class="row g-0">
 		<!-- Add the badge inside the row -->
-		<div class="badge bg-success">{`#${rankingNumber}`}</div>
+		<div class="badge bg-success">#{popular_anime_all_time_ranking}</div>
 
 		<div class="col-md-2">
 			<img
-				src="https://cdn.myanimelist.net/images/anime/1188/136926.jpg"
+				src={popular_anime_all_time_img}
 				class="img-fluid rounded-start"
 				alt="..."
 				style="width: 50px; height: 70px"
@@ -19,8 +21,10 @@
 		</div>
 		<div class="col-md-8">
 			<div class="card-body" style="padding: 8px;">
-				<h6 class="card-title text-white fw-bold mb-1">{animeTitle}</h6>
-				<p class="card-text text-white"><small>{animeDetails}</small></p>
+				<h6 class="card-title text-white fw-bold mb-1">
+					<small>{popular_anime_all_time_title}</small>
+				</h6>
+				<p class="card-text text-white"><small>Studio: {popular_anime_all_time_studio}</small></p>
 			</div>
 		</div>
 	</div>

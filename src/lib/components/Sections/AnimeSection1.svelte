@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import IndexCard from '../IndexCard.svelte';
 	import LatestEpisodeCard from '../LatestEpisodeCard.svelte';
-	import NewsCard from '../NewsCard.svelte';
+
 	import RecommendedMangaCard from '../RecommendedMangaCard.svelte';
 
 	interface Seasonal_Anime {
@@ -164,10 +164,12 @@
 
 		for (let i = 0; i < NUM_RANDOM_MANGA; i++) {
 			try {
-				const response = await fetch('https://api.jikan.moe/v4/random/manga');
+				const response = await fetch(
+					'https://api.jikan.moe/v4/random/manga?type=Manga&approved=true'
+				);
 				const data = await response.json();
 				mangaList.push(data);
-				console.log(`Random Manga ${i + 1}:`, data);
+				// console.log(`Random Manga ${i + 1}:`, data);
 			} catch (error) {
 				console.error('Error fetching random manga:', error);
 			}
