@@ -20,7 +20,7 @@
 		grid-template-rows: 1fr;
 		grid-auto-columns: 1fr;
 		grid-auto-rows: 1fr;
-		gap: 0px 1fr;
+		gap: 0px 80px;
 		grid-auto-flow: row;
 		grid-template-areas: 'sections ranking';
 	}

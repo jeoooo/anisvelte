@@ -3,6 +3,7 @@
 	import IndexCard from '../IndexCard.svelte';
 	import LatestEpisodeCard from '../LatestEpisodeCard.svelte';
 	import NewsCard from '../NewsCard.svelte';
+	import RecommendedMangaCard from '../RecommendedMangaCard.svelte';
 
 	interface Seasonal_Anime {
 		title: string;
@@ -31,8 +32,102 @@
 		}[];
 	}
 
+	interface RecommendedManga {
+		data: {
+			mal_id: number;
+			url: string;
+			images: {
+				jpg: {
+					image_url: string;
+					small_image_url: string;
+					large_image_url: string;
+				};
+				webp: {
+					image_url: string;
+					small_image_url: string;
+					large_image_url: string;
+				};
+			};
+			approved: boolean;
+			titles: {
+				type: string;
+				title: string;
+			}[];
+			title: string;
+			title_english: string;
+			title_japanese: string;
+			type: string;
+			chapters: number;
+			volumes: number;
+			status: string;
+			publishing: boolean;
+			published: {
+				from: string;
+				to: string;
+				prop: {
+					from: {
+						day: number;
+						month: number;
+						year: number;
+					};
+					to: {
+						day: number;
+						month: number;
+						year: number;
+					};
+					string: string;
+				};
+			};
+			score: number;
+			scored_by: number;
+			rank: number;
+			popularity: number;
+			members: number;
+			favorites: number;
+			synopsis: string;
+			background: string;
+			authors: {
+				mal_id: number;
+				type: string;
+				name: string;
+				url: string;
+			}[];
+			serializations: {
+				mal_id: number;
+				type: string;
+				name: string;
+				url: string;
+			}[];
+			genres: {
+				mal_id: number;
+				type: string;
+				name: string;
+				url: string;
+			}[];
+			explicit_genres: {
+				mal_id: number;
+				type: string;
+				name: string;
+				url: string;
+			}[];
+			themes: {
+				mal_id: number;
+				type: string;
+				name: string;
+				url: string;
+			}[];
+			demographics: {
+				mal_id: number;
+				type: string;
+				name: string;
+				url: string;
+			}[];
+		};
+	}
+
 	let seasonal_anime: Seasonal_Anime[] = []; // Initialize as an empty array
 	let latest_episodes: RecentAnime[] = []; // Initialize as an empty array
+	let recommended_manga: RecommendedManga[] = []; // Initialize as an empty array
 
 	async function fetchSeasonalAnime() {
 		try {
@@ -56,21 +151,41 @@
 			latest_episodes = data.data;
 
 			// log latest episodes
-			console.log(latest_episodes);
+			// console.log(latest_episodes);
 		} catch (error) {
 			console.error('Error fetching latest episodes data:', error);
 		}
 	}
 
+	const NUM_RANDOM_MANGA = 5; // Number of random manga entries you want
+
+	async function fetchRecommendedManga() {
+		const mangaList = [];
+
+		for (let i = 0; i < NUM_RANDOM_MANGA; i++) {
+			try {
+				const response = await fetch('https://api.jikan.moe/v4/random/manga');
+				const data = await response.json();
+				mangaList.push(data);
+				console.log(`Random Manga ${i + 1}:`, data);
+			} catch (error) {
+				console.error('Error fetching random manga:', error);
+			}
+		}
+
+		recommended_manga = mangaList; // Update recommended_manga array
+	}
+
 	onMount(() => {
 		fetchSeasonalAnime();
 		fetchLatestEpisodes();
+		fetchRecommendedManga();
 	});
 </script>
 
 <div class="container mb-3">
 	<div class="title">
-		<h3 class="text-primary fw-bold m-2">Anime 2023</h3>
+		<h3 class="text-primary fw-bold m-2">Summer 2023 Anime</h3>
 		<button type="button" class="btn btn-primary" style="position: absolute; left: 975px;">
 			View More <i class="bi bi-arrow-right" />
 		</button>
@@ -106,15 +221,18 @@
 <!-- arrange the cards below placed as rows instead of by columns -->
 <div class="container mb-3">
 	<div class="title">
-		<h3 class="text-primary fw-bold m-2">Anime and Manga News</h3>
+		<h3 class="text-primary fw-bold m-2">Recommended Manga</h3>
 	</div>
 	<button type="button" class="btn btn-primary" style="position: absolute; left: 975px;">
 		View More <i class="bi bi-arrow-right" />
 	</button>
-	<div class="cards-row" style="margin-top: 10px;">
-		<NewsCard />
-		<NewsCard />
-		<NewsCard />
+	<div class="cards">
+		{#each recommended_manga as manga}
+			<RecommendedMangaCard
+				recommended_manga_title={manga.data.titles[0].title}
+				recommended_manga_img={manga.data.images.jpg.image_url}
+			/>
+		{/each}
 	</div>
 </div>
 
@@ -149,12 +267,5 @@
 		grid-auto-flow: row;
 		grid-template-areas: '. . . . .';
 		grid-area: cards;
-	}
-	/* New style for arranging cards in rows */
-	.cards-row {
-		display: flex;
-		flex-direction: column; /* Display cards in a column */
-		gap: 2px; /* Adjust the gap between cards */
-		width: 1000px;
 	}
 </style>
