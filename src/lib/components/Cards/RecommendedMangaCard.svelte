@@ -5,8 +5,8 @@
 
 <div class="card-container">
 	<div class="card">
-		<img src={recommended_manga_img} class="card-img" alt="..." />
-		<div class="gradient-overlay" />
+		<img src={recommended_manga_img} class="card-img" alt={recommended_manga_title} />
+		<!-- <div class="gradient-overlay" /> -->
 		<div class="card-title-overlay d-flex flex-column justify-content-end">
 			<h6 class="card-title">
 				{recommended_manga_title}
@@ -36,18 +36,6 @@
 
 	.card:hover {
 		transform: scale(1.05);
-	}
-
-	.gradient-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(to bottom, transparent, black);
-		opacity: 0.7;
-		z-index: 1;
-		border-radius: 10px;
 	}
 
 	.card-img {
