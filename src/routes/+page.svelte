@@ -17,6 +17,8 @@
 
 	const TOP_ANIME_FAVORITES = 'https://api.jikan.moe/v4/top/anime?type=tv&filter=favorite&limit=10';
 
+	const TOP_MANGA = 'https://api.jikan.moe/v4/top/manga?limit=9&type=manga&filter=bypopularity';
+
 	const fetchAnimeFavorites = async () => {
 		const res = await fetch(TOP_ANIME_FAVORITES);
 		const data = await res.json();
@@ -25,7 +27,7 @@
 	};
 
 	const fetchTopManga = async () => {
-		const res = await fetch(TOP_ANIME_FAVORITES);
+		const res = await fetch(TOP_MANGA);
 		const data = await res.json();
 
 		return data.data;
@@ -33,6 +35,7 @@
 
 	let recommendedManga = []; // Initialize an empty array to store the data
 	let animeFavorites = [];
+	let topmanga = [];
 
 	// Use the onMount lifecycle function to fetch data when the component mounts
 	onMount(async () => {
@@ -42,6 +45,7 @@
 
 		// Fetch anime favorites data using the fetchAnimeFavorites function
 		animeFavorites = await fetchAnimeFavorites();
+		topmanga = await fetchTopManga();
 	});
 
 	// Create a variable for the number of seasonal anime cards to render
@@ -56,7 +60,7 @@
 		</div>
 	</div>
 	<div class="section">
-		<div class="anime-cards">
+		<div class="anime-cards pb-4">
 			<div class="seasonal-anime">
 				<div class="section-title">
 					<h3 class="text-primary fw-bold" style="margin-bottom: -1100px;">Summer 2023 Anime</h3>
@@ -81,7 +85,7 @@
 				<div class="section-title-3">
 					<h3 class="text-primary fw-bold m-2">Recommended Manga</h3>
 				</div>
-				{#each recommendedManga as manga}
+				{#each recommendedManga.slice(0, MAX_CARDS_RANKING) as manga}
 					<RecommendedMangaCard image={manga.images.jpg.image_url} title={manga.titles[0].title} />
 				{/each}
 			</div>
@@ -106,6 +110,17 @@
 						ranking={anime.rank}
 						image={anime.images.jpg.image_url}
 						studio={anime.studios[0].name}
+					/>
+				{/each}
+			</div>
+			<div class="top-anime">
+				<h3 class="text-primary fw-bold mb-2">Popular Manga</h3>
+				{#each topmanga.slice(0, MAX_CARDS_RANKING) as manga}
+					<RankingCard
+						title={manga.titles[0].title}
+						ranking={manga.popularity}
+						image={manga.images.jpg.image_url}
+						studio={manga.authors[0].name}
 					/>
 				{/each}
 			</div>

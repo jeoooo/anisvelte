@@ -33,7 +33,7 @@
 					<h6 class="card-title text-white fw-bold mb-1">
 						<small>{title}</small>
 					</h6>
-					<p class="card-text text-white"><small>Studio: {studio}</small></p>
+					<p class="card-text text-white"><small>{studio}</small></p>
 				</div>
 			</div>
 		</slot>
