@@ -10,7 +10,7 @@
 	async function fetchAnimeImage() {
 		try {
 			const latest_seasonal_anime_response = await fetch(
-				'https://api.jikan.moe/v4/seasons/now?page=1&limit=5'
+				'https://api.jikan.moe/v4/anime?q=Shingeki no Kyojin: The Final Season - Kanketsu-hen'
 			);
 			const data = await latest_seasonal_anime_response.json();
 			image = data.data;

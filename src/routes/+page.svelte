@@ -17,8 +17,6 @@
 
 	const TOP_ANIME_FAVORITES = 'https://api.jikan.moe/v4/top/anime?type=tv&filter=favorite&limit=10';
 
-	const TOP_MANGA = 'https://api.jikan.moe/v4/top/manga?limit=10&type=manga&filter=bypopularity';
-
 	const fetchAnimeFavorites = async () => {
 		const res = await fetch(TOP_ANIME_FAVORITES);
 		const data = await res.json();
@@ -27,7 +25,7 @@
 	};
 
 	const fetchTopManga = async () => {
-		const res = await fetch(TOP_MANGA);
+		const res = await fetch(TOP_ANIME_FAVORITES);
 		const data = await res.json();
 
 		return data.data;
@@ -35,7 +33,6 @@
 
 	let recommendedManga = []; // Initialize an empty array to store the data
 	let animeFavorites = [];
-	let topmanga = [];
 
 	// Use the onMount lifecycle function to fetch data when the component mounts
 	onMount(async () => {
@@ -45,7 +42,6 @@
 
 		// Fetch anime favorites data using the fetchAnimeFavorites function
 		animeFavorites = await fetchAnimeFavorites();
-		topmanga = await fetchTopManga();
 	});
 
 	// Create a variable for the number of seasonal anime cards to render
@@ -59,7 +55,7 @@
 			<Hero />
 		</div>
 	</div>
-	<div class="section pb-3">
+	<div class="section">
 		<div class="anime-cards">
 			<div class="seasonal-anime">
 				<div class="section-title">
@@ -110,17 +106,6 @@
 						ranking={anime.rank}
 						image={anime.images.jpg.image_url}
 						studio={anime.studios[0].name}
-					/>
-				{/each}
-			</div>
-			<div class="popular-manga">
-				<h3 class="text-primary fw-bold mb-2">Popular Manga</h3>
-				{#each topmanga as manga}
-					<RankingCard
-						title={manga.titles[0].title}
-						ranking={manga.popularity}
-						image={manga.images.jpg.image_url}
-						studio={manga.authors[0].name}
 					/>
 				{/each}
 			</div>
