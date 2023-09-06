@@ -1,20 +1,17 @@
 <script lang="ts">
-	export let recommended_manga_title = 'Recommended Manga Title';
-	export let recommended_manga_img = 'https://cdn.myanimelist.net/images/anime/6/73245.jpg';
+	export let title = 'Recommended Manga Title';
+	export let image = 'https://cdn.myanimelist.net/images/anime/6/73245.jpg';
 </script>
 
 <div class="card-container">
 	<div class="card">
-		<img src={recommended_manga_img} class="card-img" alt={recommended_manga_title} />
-		<!-- <div class="gradient-overlay" /> -->
-		<div class="card-title-overlay d-flex flex-column justify-content-end">
-			<h6 class="card-title">
-				{recommended_manga_title}
-			</h6>
+		<img src={image} class="card-img" alt={title} />
+		<div class="gradient-overlay">
+			<div class="card-title-overlay d-flex flex-column justify-content-end">
+				<!-- optional fallback -->
+				<h6 class="card-title">{title}</h6>
+			</div>
 		</div>
-		<!-- <div class="badge bg-warning text-black" style="position: absolute; top: 32px; left: 6px;">
-			{latest_episode_anime_season}
-		</div> -->
 	</div>
 </div>
 
@@ -67,5 +64,17 @@
 
 	.card:hover .card-title {
 		opacity: 1;
+	}
+
+	.gradient-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to bottom, transparent, black);
+		opacity: 0.7;
+		z-index: 1;
+		border-radius: 10px;
 	}
 </style>

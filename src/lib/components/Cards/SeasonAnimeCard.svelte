@@ -1,19 +1,18 @@
 <script lang="ts">
 	// default values if null
-	export let latest_seasonal_anime_title: string = 'Anime Title';
-	export let latest_seasonal_anime_img: string =
-		'https://cdn.myanimelist.net/images/anime/1792/138022.jpg';
+	export let title: string = 'Anime Title';
+	export let image: string = 'https://cdn.myanimelist.net/images/anime/1792/138022.jpg';
 </script>
 
 <div class="card-container">
 	<div class="card">
 		<!-- optional fallback -->
-		<img src={latest_seasonal_anime_img} class="card-img" alt={latest_seasonal_anime_title} />
+		<img src={image} class="card-img" alt={title} />
 
 		<div class="gradient-overlay">
 			<div class="card-title-overlay d-flex flex-column justify-content-end">
 				<!-- optional fallback -->
-				<h6 class="card-title">{latest_seasonal_anime_title}</h6>
+				<h6 class="card-title">{title}</h6>
 			</div>
 		</div>
 	</div>

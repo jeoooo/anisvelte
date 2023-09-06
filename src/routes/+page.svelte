@@ -1,25 +1,42 @@
 <script lang="ts">
 	import RecommendedMangaCard from './../lib/components/Cards/RecommendedMangaCard.svelte';
-
 	import LatestEpisodeCard from './../lib/components/LatestEpisodeCard.svelte';
 	import SeasonAnimeCard from './../lib/components/Cards/SeasonAnimeCard.svelte';
 	import RankingCard from '$lib/components/Cards/RankingCard.svelte';
-
 	import Hero from '$lib/components/Hero.svelte';
 	import type { PageData } from './$types';
-
+	import { onMount } from 'svelte';
 	// @ts-ignore
 	export let data;
 
 	// @ts-ignore
-	const { seasonal_anime, top_anime_by_popularity, recent_episodes, recommended_manga } = data;
+	const { seasonal_anime, top_anime_by_popularity, recent_episodes } = data;
 
-	// console.log(data);
-	// @ts-ignore
-	// console.log(data.recommended_manga[0].data.titles[0].title);
-	// @ts-ignore
-	// console.log(data.recommended_manga[0].data.images.jpg.image_url);
-	// console.log(data.latest_episodes[0].entry.images.jpg.image_url);
+	const RECOMMENDED_MANGA =
+		'https://api.jikan.moe/v4/manga?sfw&type=manga&min_score=8.50&max_score=10.00&status=publishing&sfw=true&order_by=popularity&sort=desc';
+
+	const TOP_ANIME_FAVORITES = 'https://api.jikan.moe/v4/top/anime?type=tv&filter=favorite&limit=10';
+
+	const fetchAnimeFavorites = async () => {
+		const res = await fetch(TOP_ANIME_FAVORITES);
+		const data = await res.json();
+
+		return data.data;
+	};
+
+	let recommendedManga = []; // Initialize an empty array to store the data
+	let animeFavorites = [];
+
+	// Use the onMount lifecycle function to fetch data when the component mounts
+	onMount(async () => {
+		const res = await fetch(RECOMMENDED_MANGA);
+		const data = await res.json();
+		recommendedManga = data.data; // Assign the data to the recommendedManga variable
+
+		// Fetch anime favorites data using the fetchAnimeFavorites function
+		animeFavorites = await fetchAnimeFavorites();
+	});
+
 	// Create a variable for the number of seasonal anime cards to render
 	const MAX_CARDS = 10; // You can adjust this as needed
 	const MAX_CARDS_RANKING = 10; // You can adjust this as needed
@@ -38,21 +55,18 @@
 					<h3 class="text-primary fw-bold" style="margin-bottom: -1100px;">Summer 2023 Anime</h3>
 				</div>
 				{#each seasonal_anime as anime}
-					<SeasonAnimeCard
-						latest_seasonal_anime_img={anime.images.jpg.image_url}
-						latest_seasonal_anime_title={anime.titles[0].title}
-					/>
+					<SeasonAnimeCard image={anime.images.jpg.image_url} title={anime.titles[0].title} />
 				{/each}
 			</div>
 			<div class="latest-episodes">
 				<div class="section-title-2">
 					<h3 class="text-primary fw-bold m-2">Latest Anime Episodes</h3>
 				</div>
-				{#each recent_episodes as anime}
+				{#each recent_episodes.slice(0, MAX_CARDS) as anime}
 					<LatestEpisodeCard
-						latest_episode_anime_title={anime.title}
-						latest_episode_anime_img={anime.images.jpg.image_url}
-						latest_episode_anime_episode={anime.episodes[0].title}
+						title={anime.entry.title}
+						image={anime.entry.images.jpg.image_url}
+						episode={anime.episodes[0].title}
 					/>
 				{/each}
 			</div>
@@ -60,13 +74,9 @@
 				<div class="section-title-3">
 					<h3 class="text-primary fw-bold m-2">Recommended Manga</h3>
 				</div>
-				{#each recommended_manga.slice(0, MAX_CARDS) as manga}
-					<RecommendedMangaCard
-						recommended_manga_img={manga.data.images.jpg.image_url}
-						recommended_manga_title={manga.data.titles[0].title}
-					/>
+				{#each recommendedManga as manga}
+					<RecommendedMangaCard image={manga.images.jpg.image_url} title={manga.titles[0].title} />
 				{/each}
-				<RecommendedMangaCard />
 			</div>
 		</div>
 		<div class="ranking">
@@ -74,26 +84,23 @@
 				<h3 class="text-primary fw-bold mb-2">Popular Anime</h3>
 				{#each top_anime_by_popularity as anime}
 					<RankingCard
-						popular_anime_all_time_title={anime.title}
-						popular_anime_all_time_ranking={anime.popularity}
-						popular_anime_all_time_img={anime.images.jpg.image_url}
-						popular_anime_all_time_studio={anime.studios[0].name}
+						title={anime.title}
+						ranking={anime.popularity}
+						image={anime.images.jpg.image_url}
+						studio={anime.studios[0].name}
 					/>
 				{/each}
 			</div>
 			<div class="top-anime">
-				<h3 class="text-primary fw-bold mb-2">Popular Manga</h3>
-
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
-				<RankingCard />
+				<h3 class="text-primary fw-bold mb-2">Popular Anime</h3>
+				{#each animeFavorites as anime}
+					<RankingCard
+						title={anime.title}
+						ranking={anime.rank}
+						image={anime.images.jpg.image_url}
+						studio={anime.studios[0].name}
+					/>
+				{/each}
 			</div>
 		</div>
 	</div>
