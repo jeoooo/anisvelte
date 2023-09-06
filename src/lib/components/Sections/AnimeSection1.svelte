@@ -209,18 +209,9 @@
 	<button type="button" class="btn btn-primary" style="position: absolute; left: 975px;">
 		View More <i class="bi bi-arrow-right" />
 	</button>
-	<div class="cards">
-		{#each latest_episodes.slice(0, 5) as episode}
-			<LatestEpisodeCard
-				latest_episode_anime_title={episode.entry.title}
-				latest_episode_anime_img={episode.entry.images.jpg.image_url}
-				latest_episode_anime_episode={episode.episodes[0].title}
-			/>
-		{/each}
-	</div>
+	<div class="cards">g</div>
 </div>
 
-<!-- arrange the cards below placed as rows instead of by columns -->
 <div class="container mb-3">
 	<div class="title">
 		<h3 class="text-primary fw-bold m-2">Recommended Manga</h3>
