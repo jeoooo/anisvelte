@@ -4,7 +4,6 @@
 	import SeasonAnimeCard from './../lib/components/Cards/SeasonAnimeCard.svelte';
 	import RankingCard from '$lib/components/Cards/RankingCard.svelte';
 	import Hero from '$lib/components/Hero.svelte';
-	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
 	// @ts-ignore
 	export let data;
@@ -33,9 +32,9 @@
 		return data.data;
 	};
 
-	let recommendedManga = []; // Initialize an empty array to store the data
-	let animeFavorites = [];
-	let topmanga = [];
+	let recommendedManga: any = []; // Initialize an empty array to store the data
+	let animeFavorites: any = [];
+	let topmanga: any = [];
 
 	// Use the onMount lifecycle function to fetch data when the component mounts
 	onMount(async () => {
@@ -49,7 +48,7 @@
 	});
 
 	// Create a variable for the number of seasonal anime cards to render
-	const MAX_CARDS = 10; // You can adjust this as needed
+	const MAX_CARDS = 5; // You can adjust this as needed
 	const MAX_CARDS_RANKING = 10; // You can adjust this as needed
 </script>
 
@@ -66,7 +65,9 @@
 					<h3 class="text-primary fw-bold" style="margin-bottom: -1100px;">Summer 2023 Anime</h3>
 				</div>
 				{#each seasonal_anime as anime}
-					<SeasonAnimeCard image={anime.images.jpg.image_url} title={anime.titles[0].title} />
+					<a href={`/anime/${anime.id}`} rel="anime link">
+						<SeasonAnimeCard image={anime.images.jpg.image_url} title={anime.titles[0].title} />
+					</a>
 				{/each}
 			</div>
 			<div class="latest-episodes">
@@ -74,11 +75,13 @@
 					<h3 class="text-primary fw-bold m-2">Latest Anime Episodes</h3>
 				</div>
 				{#each recent_episodes.slice(0, MAX_CARDS) as anime}
-					<LatestEpisodeCard
-						title={anime.entry.title}
-						image={anime.entry.images.jpg.image_url}
-						episode={anime.episodes[0].title}
-					/>
+					<a href={`/anime/${anime.id}`} rel="anime link">
+						<LatestEpisodeCard
+							title={anime.entry.title}
+							image={anime.entry.images.jpg.image_url}
+							episode={anime.episodes[0].title}
+						/>
+					</a>
 				{/each}
 			</div>
 			<div class="recommended-manga">
@@ -86,7 +89,12 @@
 					<h3 class="text-primary fw-bold m-2">Recommended Manga</h3>
 				</div>
 				{#each recommendedManga.slice(0, MAX_CARDS_RANKING) as manga}
-					<RecommendedMangaCard image={manga.images.jpg.image_url} title={manga.titles[0].title} />
+					<a href={`/manga/${manga.id}`} rel="anime link">
+						<RecommendedMangaCard
+							image={manga.images.jpg.image_url}
+							title={manga.titles[0].title}
+						/>
+					</a>
 				{/each}
 			</div>
 		</div>
@@ -94,34 +102,27 @@
 			<div class="popular-anime">
 				<h3 class="text-primary fw-bold mb-2">Popular Anime</h3>
 				{#each top_anime_by_popularity as anime}
-					<RankingCard
-						title={anime.title}
-						ranking={anime.popularity}
-						image={anime.images.jpg.image_url}
-						studio={anime.studios[0].name}
-					/>
-				{/each}
-			</div>
-			<div class="top-anime">
-				<h3 class="text-primary fw-bold mb-2">Popular Anime</h3>
-				{#each animeFavorites as anime}
-					<RankingCard
-						title={anime.title}
-						ranking={anime.rank}
-						image={anime.images.jpg.image_url}
-						studio={anime.studios[0].name}
-					/>
+					<a href={`/anime/${anime.id}`} rel="anime link">
+						<RankingCard
+							title={anime.title}
+							ranking={anime.popularity}
+							image={anime.images.jpg.image_url}
+							studio={anime.studios[0].name}
+						/>
+					</a>
 				{/each}
 			</div>
 			<div class="top-anime">
 				<h3 class="text-primary fw-bold mb-2">Popular Manga</h3>
 				{#each topmanga.slice(0, MAX_CARDS_RANKING) as manga}
-					<RankingCard
-						title={manga.titles[0].title}
-						ranking={manga.popularity}
-						image={manga.images.jpg.image_url}
-						studio={manga.authors[0].name}
-					/>
+					<a href={`/manga/${manga.id}`} rel="anime link">
+						<RankingCard
+							title={manga.titles[0].title}
+							ranking={manga.popularity}
+							image={manga.images.jpg.image_url}
+							studio={manga.authors[0].name}
+						/>
+					</a>
 				{/each}
 			</div>
 		</div>
