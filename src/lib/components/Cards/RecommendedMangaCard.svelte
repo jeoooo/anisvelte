@@ -1,14 +1,16 @@
 <script lang="ts">
-	export let latest_seasonal_anime_title = 'Anime Title'; // default value
-	export let latest_seasonal_anime_img = 'https://cdn.myanimelist.net/images/anime/1792/138022.jpg';
+	export let title = 'Recommended Manga Title';
+	export let image = 'https://cdn.myanimelist.net/images/anime/6/73245.jpg';
 </script>
 
 <div class="card-container">
 	<div class="card">
-		<img src={latest_seasonal_anime_img} class="card-img" alt={latest_seasonal_anime_title} />
-		<div class="gradient-overlay" />
-		<div class="card-title-overlay d-flex flex-column justify-content-end">
-			<h6 class="card-title">{latest_seasonal_anime_title}</h6>
+		<img src={image} class="card-img" alt={title} />
+		<div class="gradient-overlay">
+			<div class="card-title-overlay d-flex flex-column justify-content-end">
+				<!-- optional fallback -->
+				<h6 class="card-title">{title}</h6>
+			</div>
 		</div>
 	</div>
 </div>
@@ -31,18 +33,6 @@
 
 	.card:hover {
 		transform: scale(1.05);
-	}
-
-	.gradient-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(to bottom, transparent, black);
-		opacity: 0.7;
-		z-index: 1;
-		border-radius: 10px;
 	}
 
 	.card-img {
@@ -74,5 +64,17 @@
 
 	.card:hover .card-title {
 		opacity: 1;
+	}
+
+	.gradient-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to bottom, transparent, black);
+		opacity: 0.7;
+		z-index: 1;
+		border-radius: 10px;
 	}
 </style>

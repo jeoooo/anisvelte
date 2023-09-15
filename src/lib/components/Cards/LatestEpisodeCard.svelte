@@ -1,14 +1,30 @@
 <script lang="ts">
-	export let latest_seasonal_anime_title = 'Anime Title'; // default value
-	export let latest_seasonal_anime_img = 'https://cdn.myanimelist.net/images/anime/1792/138022.jpg';
+	export let latest_episode_anime_title = 'Latest Anime Title';
+	export let latest_episode_anime_img = 'https://cdn.myanimelist.net/images/anime/1384/136408.jpg';
+	export let latest_episode_anime_episode = 'Episode #';
 </script>
 
 <div class="card-container">
 	<div class="card">
-		<img src={latest_seasonal_anime_img} class="card-img" alt={latest_seasonal_anime_title} />
-		<div class="gradient-overlay" />
-		<div class="card-title-overlay d-flex flex-column justify-content-end">
-			<h6 class="card-title">{latest_seasonal_anime_title}</h6>
+		<slot name="latest_episode_anime_img">
+			<!-- optional fallback -->
+			<img src={latest_episode_anime_img} class="card-img" alt={latest_episode_anime_title} />
+		</slot>
+
+		<div class="gradient-overlay">
+			<slot name="latest_episode_anime_title">
+				<div class="card-title-overlay d-flex flex-column justify-content-end">
+					<h6 class="card-title">
+						{latest_episode_anime_title}
+					</h6>
+				</div>
+			</slot>
+
+			<slot name="latest_episode_anime_episode">
+				<div class="badge bg-success" style="position: absolute; top: 8px; left: 6px;">
+					{latest_episode_anime_episode}
+				</div>
+			</slot>
 		</div>
 	</div>
 </div>
