@@ -7,9 +7,9 @@ const TOP_MANGA = 'https://api.jikan.moe/v4/top/manga?limit=9&type=manga&filter=
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async () => {
-    const fetchSeasonalAnime = fetch(SEASONAL_ANIME).then(res => res.json());
-    const fetchTopAnimeByPopularity = fetch(TOP_ANIME_POPULARITY).then(res => res.json());
-    const fetchTopManga = fetch(TOP_MANGA).then(res => res.json());
+    const fetchSeasonalAnime = fetch(SEASONAL_ANIME, { cache: 'force-cache', }).then(res => res.json());
+    const fetchTopAnimeByPopularity = fetch(TOP_ANIME_POPULARITY, { cache: 'force-cache', }).then(res => res.json());
+    const fetchTopManga = fetch(TOP_MANGA, { cache: 'force-cache', }).then(res => res.json());
 
     const [seasonalAnimeData, topAnimeByPopularityData, topMangaData] = await Promise.all([
         fetchSeasonalAnime,

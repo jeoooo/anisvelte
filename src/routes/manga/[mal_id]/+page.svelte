@@ -8,7 +8,7 @@
 	let anime: any;
 	onMount(async () => {
 		const url = 'https://api.jikan.moe/v4/manga/' + mal_id + '/full';
-		const response = await fetch(url);
+		const response = await fetch(url, { cache: 'default' });
 		anime = await response.json();
 		console.log(anime.data.title);
 	});
