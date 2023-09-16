@@ -2,6 +2,7 @@
 	import SeasonAnimeCard from './../lib/components/Cards/SeasonAnimeCard.svelte';
 	import RankingCard from '$lib/components/Cards/RankingCard.svelte';
 	import Hero from '$lib/components/Hero.svelte';
+	import LatestEpisodeCard from '$lib/components/Cards/LatestEpisodeCard.svelte';
 	import { onMount } from 'svelte';
 	// @ts-ignore
 	export let data;
@@ -9,12 +10,6 @@
 	// @ts-ignore
 	const { seasonal_anime, top_anime_by_popularity, top_manga } = data;
 
-	let recommendedManga: any = []; // Initialize an empty array to store the data
-	let animeFavorites: any = [];
-	let topmanga: any = [];
-
-	// Create a variable for the number of seasonal anime cards to render
-	const MAX_CARDS = 5; // You can adjust this as needed
 	const MAX_CARDS_RANKING = 10; // You can adjust this as needed
 </script>
 
@@ -36,6 +31,11 @@
 					</a>
 				{/each}
 			</div>
+			<div class="latest-episodes">
+				<div class="section-title-2">
+					<h3 class="text-primary fw-bold m-2">Latest News</h3>
+				</div>
+			</div>
 		</div>
 		<div class="ranking">
 			<div class="popular-anime">
@@ -53,7 +53,7 @@
 			</div>
 			<div class="top-anime">
 				<h3 class="text-primary fw-bold mb-2">Popular Manga</h3>
-				{#each top_manga.slice(0, MAX_CARDS_RANKING) as manga}
+				{#each top_manga as manga}
 					<a href={`/manga/${manga.mal_id}`} rel="anime link">
 						<RankingCard
 							title={manga.titles[0].title}
