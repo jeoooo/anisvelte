@@ -10,7 +10,14 @@
 	// @ts-ignore
 	const { seasonal_anime, top_anime_by_popularity, top_manga } = data;
 
-	const MAX_CARDS_RANKING = 10; // You can adjust this as needed
+	// let recent_episodes: any;
+	// onMount(async () => {
+	// 	const url = 'https://api.jikan.moe/v4/watch/episodes';
+	// 	const response = await fetch(url, { cache: 'no-cache' });
+	// 	recent_episodes = await response.json();
+	// 	console.log(recent_episodes.data);
+	// });
+	const MAX_CARDS = 10; // You can adjust this as needed
 </script>
 
 <div class="container">
@@ -32,9 +39,18 @@
 				{/each}
 			</div>
 			<div class="latest-episodes">
-				<div class="section-title-2">
-					<h3 class="text-primary fw-bold m-2">Latest News</h3>
-				</div>
+				<!-- <div class="section-title-2">
+					<h3 class="text-primary fw-bold m-2">Latest Episodes</h3>
+				</div> -->
+				<!-- {#each recent_episodes as anime}
+					<a href={`/anime/${anime.entry.mal_id}`} rel="anime link">
+						<LatestEpisodeCard
+							title={anime.entry.title}
+							image={anime.entry.images.jpg.image_url}
+							episode={anime.episodes[0].title}
+						/>
+					</a>
+				{/each} -->
 			</div>
 		</div>
 		<div class="ranking">
