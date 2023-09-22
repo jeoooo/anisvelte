@@ -38,20 +38,6 @@
 					</a>
 				{/each}
 			</div>
-			<div class="latest-episodes">
-				<!-- <div class="section-title-2">
-					<h3 class="text-primary fw-bold m-2">Latest Episodes</h3>
-				</div> -->
-				<!-- {#each recent_episodes as anime}
-					<a href={`/anime/${anime.entry.mal_id}`} rel="anime link">
-						<LatestEpisodeCard
-							title={anime.entry.title}
-							image={anime.entry.images.jpg.image_url}
-							episode={anime.episodes[0].title}
-						/>
-					</a>
-				{/each} -->
-			</div>
 		</div>
 		<div class="ranking">
 			<div class="popular-anime">

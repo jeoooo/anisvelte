@@ -112,7 +112,12 @@
 </script>
 
 <div class="container mt-3 mb-3">
-	<div class="header"><h1 class="fw-bold text-primary">{anime?.data.title_english}</h1></div>
+	<div class="header">
+		<h1 class="fw-bold text-primary">
+			{anime?.data.titles[0].title}
+		</h1>
+	</div>
+
 	<div class="body">
 		<div class="data">
 			<div class="image">
@@ -195,10 +200,6 @@
 									{themes.join(', ')}
 								</p>
 								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Demographics:</strong>
-									{demographics.join(', ')}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
 									<strong>Duration:</strong>
 									{duration}
 								</p>
@@ -243,8 +244,12 @@
 			<h3 class="pb-2 mb-3 text-primary border-bottom border-primary fw-bold">Synopsis</h3>
 			<p class="m-0">{anime?.data.synopsis}</p>
 			<h3 class="pb-2 mb-3 mt-3 text-primary border-bottom border-primary fw-bold">Background</h3>
-			<p class="mb-3">{anime?.data.background}</p>
-			<h3 class="pb-2 mb-3 text-primary border-bottom border-primary fw-bold">Synopsis</h3>
+			{#if anime?.data.trailer?.youtube_id === null}
+				<p class="mb-3">{anime?.data.background}</p>
+			{:else}
+				<p>No background information has been added to this title.</p>
+			{/if}
+			<h3 class="pb-2 mb-3 text-primary border-bottom border-primary fw-bold">Trailer/s</h3>
 
 			{#if anime?.data.trailer?.youtube_id}
 				<Youtube id={anime.data.trailer.youtube_id} />
@@ -259,7 +264,7 @@
 <style>
 	.container {
 		display: grid;
-		grid-template-columns: 1% 2.4fr 1%;
+		grid-template-columns: 0px 2.4fr 1%;
 		grid-template-rows: 80px max-content;
 		grid-auto-columns: 1fr;
 		grid-auto-rows: 1fr;
@@ -283,7 +288,7 @@
 
 	.body {
 		display: grid;
-		grid-template-columns: 0.7fr 1.3fr;
+		grid-template-columns: 0.5fr 1.3fr;
 		grid-template-rows: max-content;
 		gap: 0px 30px;
 		grid-auto-flow: row;
@@ -301,6 +306,10 @@
 			'image'
 			'stats';
 		grid-area: data;
+
+		/* Add a right border with your desired width and style */
+		border-right: 1px solid #2e51a2; /* You can adjust the width and color as needed */
+		padding: 20px;
 	}
 
 	.image {
@@ -326,10 +335,11 @@
 	.description {
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: max-content max-content max-content max-content max-content;
+		grid-template-rows: max-content max-content max-content max-content max-content max-content;
 		gap: 0px 0px;
 		grid-auto-flow: row;
 		grid-template-areas:
+			'.'
 			'.'
 			'.'
 			'.'
