@@ -2,10 +2,17 @@
 	// default values if null
 	export let title: string = 'Anime Title';
 	export let image: string = 'https://cdn.myanimelist.net/images/anime/1792/138022.jpg';
+	export let isLoaded: boolean = false; // Add a prop to track whether the card is loaded
+
+	// When the card is mounted, set isLoaded to true
+	import { onMount } from 'svelte';
+	onMount(() => {
+		isLoaded = true;
+	});
 </script>
 
 <div class="card-container">
-	<div class="card">
+	<div class="card" class:loaded={isLoaded}>
 		<!-- optional fallback -->
 		<img src={image} class="card-img" alt={title} />
 
@@ -27,11 +34,16 @@
 
 	.card {
 		position: relative;
-		transition: transform 0.3s;
+		transition: transform 0.3s, opacity 0.5s; /* Add opacity transition */
 		width: 100%;
 		height: 100%;
 		border-radius: 10px;
 		overflow: hidden;
+		opacity: 0; /* Initially set opacity to 0 */
+	}
+
+	.card.loaded {
+		opacity: 1; /* When loaded, set opacity to 1 */
 	}
 
 	.card:hover {

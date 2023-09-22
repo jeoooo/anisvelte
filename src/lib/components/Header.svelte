@@ -1,7 +1,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#test">
+			<a class="navbar-brand" href="/">
 				<img
 					src="https://store-images.s-microsoft.com/image/apps.17083.9007199266506523.adab9a45-6875-4ea0-b145-00abf7f7d397.abfcc7db-df11-4314-a62f-a302f0c4a286"
 					height="46"
@@ -154,3 +154,11 @@
 		</div>
 	</nav>
 </header>
+
+<style>
+	/* Dropdown item on hover */
+	.navbar .dropdown-menu a.dropdown-item:hover {
+		background-color: #2e51a2; /* Change to your primary color */
+		color: #fff; /* White text */
+	}
+</style>

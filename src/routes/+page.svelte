@@ -9,15 +9,6 @@
 
 	// @ts-ignore
 	const { seasonal_anime, top_anime_by_popularity, top_manga } = data;
-
-	// let recent_episodes: any;
-	// onMount(async () => {
-	// 	const url = 'https://api.jikan.moe/v4/watch/episodes';
-	// 	const response = await fetch(url, { cache: 'no-cache' });
-	// 	recent_episodes = await response.json();
-	// 	console.log(recent_episodes.data);
-	// });
-	const MAX_CARDS = 10; // You can adjust this as needed
 </script>
 
 <div class="container">

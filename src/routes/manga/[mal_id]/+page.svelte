@@ -20,8 +20,10 @@
 	let membersFormatted: string = formatNumberWithCommas(members);
 	let favoritesFormatted: string = formatNumberWithCommas(favorites);
 
+	let isLoading = true; // Initialize as loading
 	onMount(async () => {
 		getMangaData();
+		isLoading = false; // Set isLoading to false once data is loaded
 	});
 
 	async function getMangaData() {
@@ -80,137 +82,175 @@
 	}
 </script>
 
-<div class="container mt-3 mb-3">
-	<div class="header"><h1 class="fw-bold text-primary">{manga?.data.title_english}</h1></div>
-	<div class="body">
-		<div class="data">
-			<div class="image">
-				<center>
-					<img src={manga?.data.images.jpg.image_url} alt="" />
-				</center>
-			</div>
-			<div class="stats mt-3">
-				<table class="tg">
-					<thead>
-						<tr>
-							<th class="tg-0pky">
-								<h6 class="fw-bold pb-2 mb-2 text-primary border-bottom border-primary">
-									Alternative Titles
-								</h6>
-								{#each alternativeTitles as title}
+{#if isLoading}
+	<div class="spinner-container">
+		<img
+			src="https://media.tenor.com/DpgEL1ITpE4AAAAM/nanashi-mumei-loading.gif"
+			alt="Loading..."
+			class="spinner-gif"
+		/>
+	</div>
+{:else}
+	<div class="container mt-3 mb-3">
+		<div class="header"><h1 class="fw-bold text-primary">{manga?.data.title_english}</h1></div>
+		<div class="body">
+			<div class="data">
+				<div class="image">
+					<center>
+						<img src={manga?.data.images.jpg.image_url} alt="" />
+					</center>
+				</div>
+				<div class="stats mt-3">
+					<table class="tg">
+						<thead>
+							<tr>
+								<th class="tg-0pky">
+									<h6 class="fw-bold pb-2 mb-2 text-primary border-bottom border-primary">
+										Alternative Titles
+									</h6>
+									{#each alternativeTitles as title}
+										<p class="fw-normal mb-1" style="font-size: 0.875em;">
+											<strong>{title.type}:</strong>
+											{title.title}
+										</p>
+									{/each}
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="tg-0lax">
+									<h6 class="fw-bold pb-2 mt-3 mb-3 text-primary border-bottom border-primary">
+										Information
+									</h6>
 									<p class="fw-normal mb-1" style="font-size: 0.875em;">
-										<strong>{title.type}:</strong>
-										{title.title}
+										<strong>Type:</strong>
+										{manga?.data.type}
 									</p>
-								{/each}
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="tg-0lax">
-								<h6 class="fw-bold pb-2 mt-3 mb-3 text-primary border-bottom border-primary">
-									Information
-								</h6>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Type:</strong>
-									{manga?.data.type}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Volumes:</strong>
-									{#if manga?.data.volumes == null}
-										Unknown
-									{:else}
-										{manga?.data.volumes}
-									{/if}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Chapters:</strong>
-									{#if manga?.data.chapters == null}
-										Unknown
-									{:else}
-										{manga?.data.chapters}
-									{/if}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Status:</strong>
-									{#if manga?.data.status == null}
-										Unknown
-									{:else}
-										{manga?.data.status}
-									{/if}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Published:</strong>
-									{manga?.data.published.string}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Genres:</strong>
-									{#if manga?.data.status == null}
-										Unknown
-									{:else}
-										{genres.join(', ')}
-									{/if}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Themes:</strong>
-									{themes.join(', ')}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Demographics:</strong>
-									{demographics.join(', ')}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Serializations:</strong>
-									{serializations.join(', ')}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Authors:</strong>
-									{authors.join(', ')}
-								</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<h6 class="fw-bold pb-2 mt-3 mb-3 text-primary border-bottom border-primary">
-									Statistics
-								</h6>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Score:</strong>
-									{manga?.data.score}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Rank:</strong>
-									{manga?.data.rank}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Rank:</strong>
-									{manga?.data.popularity}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Members:</strong>
-									{membersFormatted}
-								</p>
-								<p class="fw-normal mb-1" style="font-size: 0.875em;">
-									<strong>Favorites:</strong>
-									{favoritesFormatted}
-								</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Volumes:</strong>
+										{#if manga?.data.volumes == null}
+											Unknown
+										{:else}
+											{manga?.data.volumes}
+										{/if}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Chapters:</strong>
+										{#if manga?.data.chapters == null}
+											Unknown
+										{:else}
+											{manga?.data.chapters}
+										{/if}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Status:</strong>
+										{#if manga?.data.status == null}
+											Unknown
+										{:else}
+											{manga?.data.status}
+										{/if}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Published:</strong>
+										{manga?.data.published.string}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Genres:</strong>
+										{#if manga?.data.status == null}
+											Unknown
+										{:else}
+											{genres.join(', ')}
+										{/if}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Themes:</strong>
+										{themes.join(', ')}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Demographics:</strong>
+										{demographics.join(', ')}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Serializations:</strong>
+										{serializations.join(', ')}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Authors:</strong>
+										{authors.join(', ')}
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6 class="fw-bold pb-2 mt-3 mb-3 text-primary border-bottom border-primary">
+										Statistics
+									</h6>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Score:</strong>
+										{manga?.data.score}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Rank:</strong>
+										{manga?.data.rank}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Rank:</strong>
+										{manga?.data.popularity}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Members:</strong>
+										{membersFormatted}
+									</p>
+									<p class="fw-normal mb-1" style="font-size: 0.875em;">
+										<strong>Favorites:</strong>
+										{favoritesFormatted}
+									</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-		<div class="description">
-			<h3 class="pb-2 mb-3 text-primary border-bottom border-primary fw-bold">Synopsis</h3>
-			<p class="m-0">{manga?.data.synopsis}</p>
-			<h3 class="pb-2 mb-3 mt-3 text-primary border-bottom border-primary fw-bold">Background</h3>
-			<p class="mb-3">{manga?.data.background}</p>
+			<div class="description">
+				<h3 class="pb-2 mb-3 text-primary border-bottom border-primary fw-bold">Synopsis</h3>
+				<p class="m-0">{manga?.data.synopsis}</p>
+				<h3 class="pb-2 mb-3 mt-3 text-primary border-bottom border-primary fw-bold">Background</h3>
+				<p class="mb-3">{manga?.data.background}</p>
+			</div>
 		</div>
 	</div>
-</div>
+{/if}
 
 <style>
+	/* Loading spinner styles */
+	.spinner-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		/* background-color: white; */
+		background-color: #f9f8f1;
+		z-index: 9999; /* Ensure the spinner appears on top of other elements */
+	}
+
+	.spinner {
+		border: 4px solid rgba(255, 255, 255, 0.3);
+		border-radius: 50%;
+		border-top: 4px solid #2e51a2; /* Use your desired spinner color */
+		width: 40px;
+		height: 40px;
+		animation: spin 1s linear infinite;
+	}
+
+	.spinner-gif {
+		max-width: 400px; /* Adjust the size of the GIF as needed */
+	}
+
 	.container {
 		display: grid;
 		grid-template-columns: 0px 2.4fr 1%;

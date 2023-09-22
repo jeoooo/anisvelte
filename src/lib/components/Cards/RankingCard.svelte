@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+
 	export let ranking: number = 1; // Replace with the actual ranking number
 	export let title: string = 'Anime Title'; // Replace with your anime title
 	export let studio: string = 'Studio Name'; // Replace with your anime details
 	export let image: string = 'https://cdn.myanimelist.net/images/anime/1188/136926.jpg';
 </script>
 
-<div class="card mb-2 bg-primary">
+<div class="card mb-2 bg-primary" in:fade={{ duration: 400 }}>
 	<div class="row g-0">
 		<!-- Add the badge inside the row -->
 		<slot name="popular_anime_all_time_ranking">
