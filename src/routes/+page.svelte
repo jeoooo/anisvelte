@@ -1,229 +1,87 @@
 <script lang="ts">
-	import SeasonAnimeCard from './../lib/components/Cards/SeasonAnimeCard.svelte';
-	import RankingCard from '$lib/components/Cards/RankingCard.svelte';
-	import Hero from '$lib/components/Hero.svelte';
-	import LatestEpisodeCard from '$lib/components/Cards/LatestEpisodeCard.svelte';
-	import { onMount } from 'svelte';
-	// @ts-ignore
-	export let data;
+	import ItemCard from './components/ItemCard.svelte';
+	import RankingCard from './components/RankingCard.svelte';
+	import type { PageData } from './$types';
 
+	export let data;
 	// @ts-ignore
-	const { seasonal_anime, top_anime_by_popularity, top_manga } = data;
+	const { seasonal_anime, upcoming_anime } = data;
 </script>
 
-<div class="container">
-	<div class="hero">
-		<div class="hero-box">
-			<Hero />
+<div class="flex flex-col mt-10">
+	<div class="my-3 p-3">
+		<p class="py-6 px-0 text-4xl text-white font-bold">Seasonal Anime</p>
+
+		<!-- Use responsive grid classes -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+			{#each seasonal_anime as anime}
+				<ItemCard
+					image_url={anime.images.jpg.large_image_url}
+					score={anime.score}
+					scored_by={anime.scored_by}
+					title={anime.title}
+				/>
+			{/each}
 		</div>
 	</div>
-	<div class="section">
-		<div class="anime-cards pb-4">
-			<div class="seasonal-anime">
-				<div class="section-title">
-					<h3 class="text-primary fw-bold" style="margin-bottom: -1100px;">Summer 2023 Anime</h3>
-				</div>
-				{#each seasonal_anime as anime}
-					<a href={`/anime/${anime.mal_id}`} rel="anime link">
-						<SeasonAnimeCard image={anime.images.jpg.image_url} title={anime.titles[0].title} />
-					</a>
-				{/each}
-			</div>
-		</div>
-		<div class="ranking">
-			<div class="popular-anime">
-				<h3 class="text-primary fw-bold mb-2">Popular Anime</h3>
-				{#each top_anime_by_popularity as anime}
-					<a href={`/anime/${anime.mal_id}`} rel="anime link">
-						<RankingCard
-							title={anime.title}
-							ranking={anime.popularity}
-							image={anime.images.jpg.image_url}
-							studio={anime.studios[0].name}
-						/>
-					</a>
-				{/each}
-			</div>
-			<div class="top-anime">
-				<h3 class="text-primary fw-bold mb-2">Popular Manga</h3>
-				{#each top_manga as manga}
-					<a href={`/manga/${manga.mal_id}`} rel="anime link">
-						<RankingCard
-							title={manga.titles[0].title}
-							ranking={manga.popularity}
-							image={manga.images.jpg.image_url}
-							studio={manga.authors[0].name}
-						/>
-					</a>
-				{/each}
-			</div>
+
+	<div class="my-3 p-3">
+		<p class="py-6 px-0 text-4xl text-white font-bold">Upcoming Anime</p>
+
+		<!-- Use responsive grid classes -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+			{#each upcoming_anime as anime}
+				<ItemCard
+					image_url={anime.images.jpg.large_image_url}
+					score={anime.score}
+					scored_by={anime.scored_by}
+					title={anime.title}
+					type="upcoming"
+				/>
+			{/each}
 		</div>
 	</div>
 </div>
 
-<style>
-	.container {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: auto 2.1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-rows: 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'hero'
-			'section';
-	}
+<!-- <div class="flex flex-col py-3">
 
-	.hero {
-		display: grid;
-		grid-template-columns: 1.2fr max-content 1fr;
-		grid-template-rows: 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas: '. hero-box .';
-		grid-area: hero;
-	}
 
-	.hero-box {
-		grid-area: hero-box;
-	}
+	<div class="grid grid-cols-5 grid-flow-row bg-blue-500 p-6 gap-3">
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+		<ItemCard />
+	</div>
+</div> -->
 
-	.section {
-		display: grid;
-		grid-template-columns: 1.5fr 0.5fr;
-		grid-template-rows: 1fr;
-		gap: 0px 10px;
-		grid-auto-flow: row;
-		grid-template-areas: 'anime-cards rankings';
-		grid-area: section;
-	}
+<!-- {#each seasonal_anime as anime}
+	<i class="fa-solid fa-comment text-yellow-400" /> 15,000
+	<div class="flex flex-col h-auto w-auto border border-black rounded-md">
+		<div class="flex flex-row p-6">
+			
+			<div class="">
+				<img src={anime.images.jpg.large_image_url} alt="" class="rounded-md" />
+			</div>
 
-	.anime-cards {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: max-content max-content max-content;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'seasonal-anime'
-			'latest-episodes'
-			'recommended-manga';
-		grid-area: anime-cards;
-	}
+			<h6 class="p-6">{anime.titles[0].title}</h6>
+		</div>
+	</div>
+{/each} -->
 
-	.seasonal-anime {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-		grid-template-rows: 50px 1.5fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'section-title section-title section-title section-title section-title'
-			'. . . . .';
-		grid-area: seasonal-anime;
-	}
+<!-- <h1 class=" p-3">Top Anime</h1>
+{#each top_anime_by_popularity as anime}
+	<div class="flex flex-row"><h6>{anime.titles[0].title}</h6></div>
+{/each} -->
 
-	.section-title {
-		display: grid;
-		grid-template-columns: 1.6fr 0.4fr;
-		grid-template-rows: 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas: '. .';
-		grid-area: section-title;
-	}
-
-	.latest-episodes {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-		grid-template-rows: 50px 1.5fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'section-title-2 section-title-2 section-title-2 section-title-2 section-title-2'
-			'. . . . .';
-		grid-area: latest-episodes;
-	}
-
-	.section-title-2 {
-		display: grid;
-		grid-template-columns: 1.6fr 0.4fr;
-		grid-template-rows: 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas: '. .';
-		grid-area: section-title-2;
-	}
-
-	.recommended-manga {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-		grid-template-rows: 50px 1.5fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'section-title-3 section-title-3 section-title-3 section-title-3 section-title-3'
-			'. . . . .';
-		grid-area: recommended-manga;
-	}
-
-	.section-title-3 {
-		display: grid;
-		grid-template-columns: 1.6fr 0.4fr;
-		grid-template-rows: 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas: '. .';
-		grid-area: section-title-3;
-	}
-
-	.rankings {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: 1fr 1fr 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'popular-anime'
-			'top-anime'
-			'popular-manga';
-		grid-area: rankings;
-	}
-
-	.popular-anime {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: max-content 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'.'
-			'.';
-		grid-area: popular-anime;
-	}
-
-	.popular-manga {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: max-content 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'.'
-			'.';
-		grid-area: popular-manga;
-	}
-
-	.top-anime {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: max-content 1fr;
-		gap: 0px 0px;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'.'
-			'.';
-		grid-area: top-anime;
-	}
-</style>
+<!-- <h1 class=" p-3">Top Manga</h1>
+{#each top_manga as manga}
+	<div class="flex flex-row"><h6>{manga.titles[0].title}</h6></div>
+{/each} -->
