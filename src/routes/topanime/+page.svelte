@@ -1,5 +1,5 @@
 <script lang="ts">
-	import RankingCard from '../components/RankingCard.svelte';
+	import RankingCard from '$lib/components/RankingCard.svelte';
 
 	export let data: {
 		top_anime: {
@@ -14,9 +14,9 @@
 	let sortedTopAnime = [...data.top_anime].sort((a, b) => a.rank - b.rank);
 </script>
 
-<div class="bg-teal-500">
-	<div class="flex flex-col px-24 py-10">
-		<h1 class="font-black text-5xl my-4">Top Anime</h1>
+<div class="bg-[#222]">
+	<div class="flex flex-col px-32 py-10">
+		<h1 class="font-black text-5xl my-4 font-overpass text-white">Top Anime</h1>
 		{#each sortedTopAnime as anime (anime.rank)}
 			<RankingCard
 				type="anime"

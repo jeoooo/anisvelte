@@ -2,16 +2,11 @@ const TOP_ANIME = 'https://api.jikan.moe/v4/top/anime?="tv"&="bypopularity"&sfw=
 // const UPCOMING_ANIME = 'https://api.jikan.moe/v4/seasons/upcoming';
 
 // Cache to store fetched data
-const cache: { [url: string]: any } = {};
 
 // Define the load function
 export const load = async () => {
-	const fetchWithCache = async (url: string) => {
+	const fetchWithoutCache = async (url: string) => {
 		try {
-			if (cache[url]) {
-				return cache[url];
-			}
-
 			const response = await fetch(url);
 
 			if (!response.ok) {
@@ -19,9 +14,6 @@ export const load = async () => {
 			}
 
 			const data = await response.json();
-
-			// Cache the data
-			cache[url] = data;
 			return data;
 		} catch (error: any) {
 			console.error(`Error fetching data from ${url}:`, error.message);
@@ -30,17 +22,12 @@ export const load = async () => {
 	};
 
 	try {
-		const fetchTopAnime = fetchWithCache(TOP_ANIME);
-		// const fetchUpcomingAnime = fetchWithCache(UPCOMING_ANIME);
+		const fetchTopAnime = fetchWithoutCache(TOP_ANIME);
 
-		const [topAnime] = await Promise.all([
-			fetchTopAnime
-			// fetchUpcomingAnime
-		]);
+		const [topAnime] = await Promise.all([fetchTopAnime]);
 
 		return {
 			top_anime: topAnime.data
-			// upcoming_anime: upcomingAnimeData.data
 		};
 	} catch (error: any) {
 		console.error('Error in load function:', error.message);
