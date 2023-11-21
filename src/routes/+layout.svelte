@@ -5,12 +5,8 @@
 	import Footer from './components/Footer.svelte';
 </script>
 
-<Header />
-
-<div class="bg-[#091020]">
-	<div class="flex w-max mx-auto py-3">
-		<slot />
-	</div>
+<div class="bg-[#222]">
+	<Header />
+	<slot />
+	<Footer />
 </div>
-
-<Footer />

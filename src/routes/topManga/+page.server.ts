@@ -1,4 +1,4 @@
-const TOP_MANGA = 'https://api.jikan.moe/v4/top/manga?type="manga"&filter="bypopularity"&limit=10';
+const TOP_MANGA = 'https://api.jikan.moe/v4/top/manga?type=manga&filter=bypopularity&limit=10';
 
 // Cache to store fetched data
 const cache: { [url: string]: any } = {};

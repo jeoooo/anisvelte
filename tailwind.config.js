@@ -4,7 +4,11 @@ export default {
 
   plugins: [require('flowbite/plugin')],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        overpass: ['Overpass', 'sans-serif'],
+      }
+    }
   },
   plugins: [
     require('flowbite/plugin')

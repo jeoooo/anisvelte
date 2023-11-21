@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { NumberFormatter } from '$lib/utils/NumberFormatter';
+
 	// your script goes here
 	export let rank: number = 111;
 	export let image_url: string = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg';
@@ -6,6 +8,10 @@
 	export let score: number = 4.5;
 	export let scored_by: number = 12345;
 	export let type: string = 'seasonal';
+
+	// If score or scored_by is null or undefined, set them to 0
+	$: score = score !== null && score !== undefined ? score : 0;
+	$: scored_by = scored_by !== null && scored_by !== undefined ? scored_by : 0;
 </script>
 
 {#if type == 'seasonal'}
@@ -25,18 +31,24 @@
 				/>
 
 				<!-- Opaque overlay with information below the image -->
-				<div
-					class="absolute inset-x-0 bottom-0 bg-slate-800 opacity-80 rounded-b-md flex flex-row items-center p-2"
-				>
-					<i class="fa-solid fa-star text-yellow-400 mr-1" />
-					<p class="flex-grow text-white">{score}</p>
-					<i class="fa-solid fa-comment text-yellow-400 mr-1" />
-					<p class="text-white">{scored_by}</p>
-				</div>
+				{#if score != 0 && scored_by != 0}
+					<div
+						class="absolute inset-x-0 bottom-0 bg-[#222] opacity-80 rounded-b-md flex flex-row items-center p-2"
+					>
+						<i class="fa-solid fa-star text-yellow-400 mr-1" />
+						<p class="flex-grow text-white font-overpass font-light">{score}</p>
+						<i class="fa-solid fa-comment text-yellow-400 mr-1" />
+						<p class="text-white font-overpass font-light">
+							{NumberFormatter.formatWithCommas(scored_by)}
+						</p>
+					</div>
+				{/if}
 			</div>
 		</div>
 		<div class="flex w-52">
-			<h1 class=" p-2 text-l text-white truncate text-ellipsis">{title}</h1>
+			<h1 class=" p-2 text-l text-white truncate text-ellipsis font-overpass font-light">
+				{title}
+			</h1>
 		</div>
 	</div>
 {:else if type == 'upcoming'}
@@ -63,7 +75,9 @@
 			</div>
 		</div>
 		<div class="flex w-52">
-			<h1 class=" p-2 text-l text-white truncate text-ellipsis">{title}</h1>
+			<h1 class=" p-2 text-l text-white truncate text-ellipsis font-overpass font-light">
+				{title}
+			</h1>
 		</div>
 	</div>
 {/if}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { NumberFormatter } from '$lib/utils/NumberFormatter';
 	import RankingCard from '../components/RankingCard.svelte';
 
 	export let data: {
@@ -14,9 +15,9 @@
 	let sortedTopManga = [...data.top_manga].sort((a, b) => a.rank - b.rank);
 </script>
 
-<div class="flex flex-col">
-	<h1 class="text-white py-2 px-3 text-4xl font-bold">Top Anime</h1>
-	<div class="w-[1200px] my-3">
+<div class="bg-teal-500">
+	<div class="flex flex-col px-24 py-10">
+		<h1 class="font-black text-5xl my-4">Top Manga</h1>
 		{#each sortedTopManga as manga (manga.rank)}
 			<RankingCard
 				type="manga"

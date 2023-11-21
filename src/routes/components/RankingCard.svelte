@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { NumberFormatter } from '$lib/utils/NumberFormatter';
+
 	export let rank: number = 1;
 	export let title: string = 'title';
 	export let image_url: string = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg';
@@ -28,7 +30,7 @@
 						<i class="fa-solid fa-star text-yellow-400 m-1" />
 						{score}
 						<i class="fa-solid fa-comment text-yellow-400 m-1" />
-						{scored_by}
+						{NumberFormatter.formatWithCommas(scored_by)}
 					</div>
 				</div>
 			</div>
@@ -55,7 +57,7 @@
 						<i class="fa-solid fa-star text-yellow-400 m-1" />
 						{score}
 						<i class="fa-solid fa-comment text-yellow-400 m-1" />
-						{scored_by}
+						{NumberFormatter.formatWithCommas(scored_by)}
 					</div>
 				</div>
 			</div>
