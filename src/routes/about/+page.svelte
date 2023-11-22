@@ -1,6 +1,6 @@
 <div class="flex justify-center bg-[#222] w-full h-auto gap-4">
 	<div class="flex flex-col px-32">
-		<h1 class="text-5xl text-white font-black my-8 mx-4 p-10 font-overpass border-b-2">About</h1>
+		<h1 class="text-5xl text-white font-black my-8 mx-4 pb-2 font-overpass border-b-2">About</h1>
 
 		<div class="flex flex-col items-center">
 			<div class="flex flex-row items-center">
@@ -20,7 +20,7 @@
 			</div>
 		</div>
 
-		<p class="text-xl text-white font-normal mt-10 mx-4 mb-3 font-overpass">
+		<p class="text-xl text-white font-normal mt-10 mx-4 mb-3 font-overpass text-justify indent-10">
 			"AniSvelte" stands as a testament to simplicity in the world of anime-related websites. With
 			its clean design and straightforward functionality, this platform is a breath of fresh air for
 			enthusiasts. Developed using Svelte, SvelteKit, TypeScript, and the Jikan API, AniSvelte
@@ -29,7 +29,7 @@
 			easy navigation, thanks to Svelte's uncomplicated component architecture, ensures a
 			hassle-free journey.
 		</p>
-		<p class="text-xl text-white font-normal my-3 mx-4 font-overpass">
+		<p class="text-xl text-white font-normal my-3 mx-4 font-overpass text-justify indent-10">
 			The project, conceived as a sample and showcase, is a nod to efficiency without unnecessary
 			complexities. AniSvelte's use of TypeScript adds a layer of reliability, making the user
 			interface not only straightforward but also robust. SvelteKit's integration enhances
@@ -37,7 +37,7 @@
 			In essence, AniSvelte is a simple yet powerful hub for anime enthusiasts, offering a no-frills
 			space to enjoy their favorite content without any unnecessary distractions.
 		</p>
-		<p class="text-xl text-white font-normal mt-3 mx-4 mb-10 font-overpass">
+		<p class="text-xl text-white font-normal mt-3 mx-4 mb-10 font-overpass text-justify indent-10">
 			AniSvelte's charm lies in its commitment to simplicity. This anime-centric website, developed
 			with a focus on user ease, provides a streamlined experience for fans. By leveraging Svelte's
 			clean component architecture and TypeScript's reliability, AniSvelte ensures that users can

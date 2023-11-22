@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { NumberFormatter } from '$lib/utils/NumberFormatter';
 
-	export let rank: number = 1;
 	export let title: string = 'title';
 	export let image_url: string = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg';
 	export let score: number = 4.5;

@@ -8,6 +8,9 @@
 	const { seasonal_anime, upcoming_anime } = data;
 </script>
 
+<svelte:head>
+	<title>AniSvelte</title>
+</svelte:head>
 <div class="flex justify-center bg-[#222] w-full h-auto gap-4">
 	<div class="flex flex-col px-32">
 		<h1 class="text-5xl text-white font-black my-8 mx-4 font-overpass">Seasonal Anime</h1>

@@ -18,22 +18,38 @@
 				class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400"
 			>
 				<li>
-					<a href="#" class="mr-4 hover:underline md:mr-6 text-white font-overpass font-light"
+					<a href="/about" class="mr-4 hover:underline md:mr-6 text-white font-overpass font-light"
 						>About</a
 					>
 				</li>
 				<li>
-					<a href="#" class="mr-4 hover:underline md:mr-6 text-white font-overpass font-light"
-						>Jikan API</a
+					<a
+						href="https://myanimelist.net/"
+						target="_blank"
+						class="mr-4 hover:underline md:mr-6 text-white font-overpass font-light"
+						>MyAnimeList.net</a
 					>
 				</li>
 				<li>
-					<a href="#" class="mr-4 hover:underline md:mr-6 text-white font-overpass font-light"
-						>Svelte</a
+					<a
+						href="https://jikan.moe/"
+						target="_blank"
+						class="mr-4 hover:underline md:mr-6 text-white font-overpass font-light">Jikan API</a
 					>
 				</li>
 				<li>
-					<a href="#" class="hover:underline text-white font-overpass font-light">Github Repo</a>
+					<a
+						href="https://svelte.dev/"
+						target="_blank"
+						class="mr-4 hover:underline md:mr-6 text-white font-overpass font-light">Svelte</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://github.com/jeoooo/anilist"
+						target="_blank"
+						class="hover:underline text-white font-overpass font-light">Github Repo</a
+					>
 				</li>
 			</ul>
 		</div>
@@ -58,7 +74,7 @@
 			</svg>
 
 			<a
-				href="https://flowbite.com/"
+				href="/"
 				class="hover:underline hover:underline-offset-2 text-white font-overpass font-extralight"
 				>AniSvelte</a
 			>. All Rights Reserved.</span

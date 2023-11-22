@@ -1,3 +1,83 @@
+<script>
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
+	let query = '';
+	let suggestions = [];
+
+	const RATE_LIMIT = 333; // 3 requests per second
+	let lastSearchTime = 0;
+	const requestQueue = [];
+
+	async function handleSearch() {
+		try {
+			const currentTime = Date.now();
+			const timeSinceLastSearch = currentTime - lastSearchTime;
+
+			if (timeSinceLastSearch < RATE_LIMIT) {
+				requestQueue.push(query);
+			} else {
+				await makeAPICall(query);
+			}
+		} catch (error) {
+			console.error('Error fetching search suggestions:', error);
+		}
+	}
+
+	async function makeAPICall(query) {
+		try {
+			const response = await fetch(`https://api.jikan.moe/v4/anime?q=${query}`);
+			const data = await response.json();
+
+			if (data.data) {
+				suggestions = data.data
+					.map((item) => ({
+						mal_id: item.mal_id,
+						title: item.title,
+						imageUrl: item.images.jpg.small_image_url,
+						type: item.type
+					}))
+					.slice(0, 10);
+			} else {
+				console.error('Invalid API response format:', data);
+			}
+
+			lastSearchTime = Date.now();
+
+			if (requestQueue.length > 0) {
+				const nextQuery = requestQueue.shift();
+				await makeAPICall(nextQuery);
+			}
+		} catch (error) {
+			console.error('Error fetching search suggestions:', error);
+		}
+	}
+
+	function clearSuggestions() {
+		suggestions = [];
+	}
+
+	function handleSuggestionClick(mal_id) {
+		console.log('Navigate to:', mal_id);
+		goto(`/anime/${mal_id}`);
+	}
+
+	onMount(() => {
+		window.addEventListener('click', handleWindowClick);
+
+		return () => {
+			window.removeEventListener('click', handleWindowClick);
+		};
+	});
+
+	function handleWindowClick(event) {
+		const isSuggestion = event.target.closest('.suggestion-item');
+		if (!isSuggestion) {
+			clearSuggestions();
+		}
+	}
+</script>
+
 <nav class="bg-[#2e2e2e] border-gray-200 dark:bg-gray-900">
 	<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 		<a href="/" class="flex items-center justify-between">
@@ -43,6 +123,20 @@
 			>
 				<li>
 					<a
+						href="/"
+						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
+						aria-current="page">Anime</a
+					>
+				</li>
+				<li>
+					<a
+						href="/topAnime"
+						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
+						aria-current="page">Manga</a
+					>
+				</li>
+				<li>
+					<a
 						href="/topAnime"
 						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
 						aria-current="page">Top Anime</a
@@ -58,10 +152,56 @@
 
 				<li>
 					<a
-						href="#"
+						href="/about"
 						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
 						>About</a
 					>
+				</li>
+				<li>
+					<div class="relative">
+						<input
+							type="text"
+							placeholder="Search..."
+							class="text-sm rounded-full bg-[#383838] h-[30px] px-[32px] w-[250px] border-none focus:ring-2 focus:ring-[#ff3e00] caret-[#ff3e00] text-white font-overpass font-light relative"
+							bind:value={query}
+							on:input={handleSearch}
+							on:focus={handleSearch}
+						/>
+						<i
+							class="fa-solid fa-magnifying-glass absolute text-sm left-3 top-[14px] transform -translate-y-1/2 text-white"
+						/>
+
+						{#if suggestions.length > 0}
+							<ul
+								class="absolute left-0 mt-2 bg-[#2e2e2e] border border-gray-500 rounded-lg shadow-md z-10"
+							>
+								{#each suggestions as { mal_id, title, imageUrl, type }, index}
+									{#if index >= 5 && index < 10}
+										<!-- Limit the suggestions to be between 5 and 10 -->
+										<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+										<!-- svelte-ignore a11y-click-events-have-key-events -->
+
+										<li
+											on:click={() => handleSuggestionClick(mal_id)}
+											class="flex items-center px-4 py-2 cursor-pointer hover:bg-[#222222] w-[350px] rounded-lg"
+										>
+											<img
+												src={imageUrl}
+												alt={title}
+												class="w-10 h-10 object-cover mr-2 rounded-md"
+											/>
+											<div class="flex flex-col">
+												<span class="font-overpass text-sm font-bold text-white">{title}</span>
+												<span class="font-overpass text-xs font-normal text-white"
+													>{`Type: ${type}`}</span
+												>
+											</div>
+										</li>
+									{/if}
+								{/each}
+							</ul>
+						{/if}
+					</div>
 				</li>
 			</ul>
 		</div>
