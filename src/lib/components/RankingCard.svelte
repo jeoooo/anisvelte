@@ -1,49 +1,65 @@
 <script lang="ts">
-	export let popular_anime_all_time_ranking: number = 1; // Replace with the actual ranking number
-	export let popular_anime_all_time_title: string = 'Anime Title'; // Replace with your anime title
-	export let popular_anime_all_time_studio: string = 'Studio Name'; // Replace with your anime details
-	export let popular_anime_all_time_img: string =
-		'https://cdn.myanimelist.net/images/anime/1188/136926.jpg';
+	import { NumberFormatter } from '$lib/utils/NumberFormatter';
+
+	export let title: string = 'title';
+	export let image_url: string = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg';
+	export let score: number = 4.5;
+	export let scored_by: number = 12345;
+	export let type: string = 'anime';
 </script>
 
-<div class="card mb-2 bg-primary">
-	<div class="row g-0">
-		<!-- Add the badge inside the row -->
-		<div class="badge bg-success">#{popular_anime_all_time_ranking}</div>
+{#if type == 'anime'}
+	<div class="bg-zinc-700 w-auto h-64 rounded-md m-3 shadow-2xl">
+		<div class="flex flex-row">
+			<div class="flex w-36 h-64">
+				<!-- Set a fixed width, e.g., w-24 (adjust as needed) -->
+				<img
+					src={image_url}
+					alt=""
+					class="saturate-150 object-cover rounded-l-md w-full h-64 p-0"
+				/>
+			</div>
 
-		<div class="col-md-2">
-			<img
-				src={popular_anime_all_time_img}
-				class="img-fluid rounded-start"
-				alt="..."
-				style="width: 50px; height: 70px"
-			/>
-		</div>
-		<div class="col-md-8">
-			<div class="card-body" style="padding: 8px;">
-				<h6 class="card-title text-white fw-bold mb-1">
-					<small>{popular_anime_all_time_title}</small>
-				</h6>
-				<p class="card-text text-white"><small>Studio: {popular_anime_all_time_studio}</small></p>
+			<div class="relative">
+				<p class="text-white p-3 text-xl font-bold font-overpass">{title}</p>
+
+				<!-- This paragraph will be placed at the bottom -->
+				<div class="absolute bottom-0 text-white text-l p-3">
+					<div class="flex flex-row font-overpass font-light">
+						<i class="fa-solid fa-star text-yellow-400 m-1" />
+						{score}
+						<i class="fa-solid fa-comment text-yellow-400 m-1" />
+						{NumberFormatter.formatWithCommas(scored_by)}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+{:else if type == 'manga'}
+	<div class="bg-zinc-700 w-auto h-64 rounded-md m-3 shadow-2xl">
+		<div class="flex flex-row">
+			<div class="flex w-36 h-64">
+				<!-- Set a fixed width, e.g., w-24 (adjust as needed) -->
+				<img
+					src={image_url}
+					alt=""
+					class="saturate-150 object-cover rounded-l-md w-full h-64 p-0"
+				/>
+			</div>
 
-<style>
-	/* Your existing styles here */
+			<div class="relative">
+				<p class="text-white p-3 text-xl font-bold font-overpass">{title}</p>
 
-	/* New badge styles */
-	.badge {
-		position: absolute;
-		top: 8px;
-		right: 6px;
-		padding: 4px 8px;
-		background-color: green;
-		color: white;
-		border-radius: 5px;
-		font-size: 12px;
-		z-index: 3; /* Make sure the badge appears above other elements */
-		width: auto;
-	}
-</style>
+				<!-- This paragraph will be placed at the bottom -->
+				<div class="absolute bottom-0 text-white text-l p-3">
+					<div class="flex flex-row font-overpass font-light">
+						<i class="fa-solid fa-star text-yellow-400 m-1" />
+						{score}
+						<i class="fa-solid fa-comment text-yellow-400 m-1" />
+						{NumberFormatter.formatWithCommas(scored_by)}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
