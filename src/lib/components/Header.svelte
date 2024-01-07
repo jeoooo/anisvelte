@@ -130,7 +130,7 @@
 				</li>
 				<li>
 					<a
-						href="/topAnime"
+						href="/topManga"
 						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
 						aria-current="page">Manga</a
 					>
