@@ -1,17 +1,24 @@
 <script lang="ts">
 	import { NumberFormatter } from '$lib/utils/NumberFormatter';
 
-	// your script goes here
-	export let rank: number = 111;
-	export let image_url: string = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg';
-	export let title: string = 'title';
-	export let score: number = 4.5;
-	export let scored_by: number = 12345;
-	export let type: string = 'seasonal';
+	let {
+		rank = 111,
+		image_url = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg',
+		title = 'title',
+		score: scoreProp = 4.5,
+		scored_by: scoredByProp = 12345,
+		type = 'seasonal'
+	}: {
+		rank?: number;
+		image_url?: string;
+		title?: string;
+		score?: number;
+		scored_by?: number;
+		type?: string;
+	} = $props();
 
-	// If score or scored_by is null or undefined, set them to 0
-	$: score = score !== null && score !== undefined ? score : 0;
-	$: scored_by = scored_by !== null && scored_by !== undefined ? scored_by : 0;
+	let score = $derived(scoreProp ?? 0);
+	let scored_by = $derived(scoredByProp ?? 0);
 </script>
 
 {#if type == 'seasonal'}
@@ -35,9 +42,9 @@
 					<div
 						class="absolute inset-x-0 bottom-0 bg-[#222] opacity-80 rounded-b-md flex flex-row items-center p-2"
 					>
-						<i class="fa-solid fa-star text-yellow-400 mr-1" />
+						<i class="fa-solid fa-star text-yellow-400 mr-1"></i>
 						<p class="flex-grow text-white font-overpass font-light">{score}</p>
-						<i class="fa-solid fa-comment text-yellow-400 mr-1" />
+						<i class="fa-solid fa-comment text-yellow-400 mr-1"></i>
 						<p class="text-white font-overpass font-light">
 							{NumberFormatter.formatWithCommas(scored_by)}
 						</p>
@@ -57,21 +64,7 @@
 			class="flex flex-col w-fit rounded-t-md relative hover:scale-105 transition-transform duration-300 ease-in-out"
 		>
 			<div class="relative">
-				<!-- <div class="absolute m-2 bg-slate-600 opacity-80 rounded-md w-fit">
-				<h3 class=" text-white p-2">#{rank}</h3>
-			</div> -->
-				<!-- Actual image -->
 				<img src={image_url} alt="" class="saturate-150 rounded-md w-[220px] h-[300px]" />
-
-				<!-- Opaque overlay with information below the image -->
-				<!-- <div
-				class="absolute inset-x-0 bottom-0 bg-slate-800 opacity-80 rounded-b-md flex flex-row items-center p-2"
-			>
-				<i class="fa-solid fa-star text-yellow-400 mr-1" />
-				<p class="flex-grow text-white">{score}</p>
-				<i class="fa-solid fa-comment text-yellow-400 mr-1" />
-				<p class="text-white">{scored_by}</p>
-			</div> -->
 			</div>
 		</div>
 		<div class="flex w-52">

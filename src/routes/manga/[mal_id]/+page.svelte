@@ -11,7 +11,7 @@ The page is divided into several sections:
 
 1. **Title Section:**
    - Displays the main title of the TV show in a prominent style.
-   
+
 2. **Information Section:**
    - Provides details about the TV show, including alternative titles, type, episodes, status, aired dates, premiered date, broadcast information, producers, licensors, studios, source, genres, theme, demographic, duration, and rating.
 
@@ -42,25 +42,15 @@ The page is divided into several sections:
 
 - The design appears to be responsive, as it uses Flexbox and responsive width units to adapt to different screen sizes.
 
-## Instructions
-
-To generate documentation for this page, follow these steps:
-
-1. Review the code structure and understand the purpose of each section.
-2. Document the purpose and usage of external components.
-3. Describe the styling approach, mentioning the Tailwind CSS classes used.
-4. Highlight any responsive design features observed in the code.
-
 -->
 
 <script lang="ts">
 	import { DateFormatter } from '$lib/utils/DateFormatter.js';
 	import { NumberFormatter } from '$lib/utils/NumberFormatter';
 	import { StringFormatter } from '$lib/utils/StringFormatter.js';
-	import Youtube from 'svelte-youtube-embed';
-	export let data;
-	const { manga_data } = data;
-	// console.log(manga_data.data.images.jpg.large_image_url);
+
+	let { data } = $props();
+	let manga_data = $derived(data.manga_data);
 </script>
 
 <svelte:head>

@@ -1,18 +1,25 @@
 <script lang="ts">
 	import { NumberFormatter } from '$lib/utils/NumberFormatter';
 
-	export let title: string = 'title';
-	export let image_url: string = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg';
-	export let score: number = 4.5;
-	export let scored_by: number = 12345;
-	export let type: string = 'anime';
+	let {
+		title = 'title',
+		image_url = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg',
+		score = 4.5,
+		scored_by = 12345,
+		type = 'anime'
+	}: {
+		title?: string;
+		image_url?: string;
+		score?: number;
+		scored_by?: number;
+		type?: string;
+	} = $props();
 </script>
 
 {#if type == 'anime'}
 	<div class="bg-zinc-700 w-auto h-64 rounded-md m-3 shadow-2xl">
 		<div class="flex flex-row">
 			<div class="flex w-36 h-64">
-				<!-- Set a fixed width, e.g., w-24 (adjust as needed) -->
 				<img
 					src={image_url}
 					alt=""
@@ -23,12 +30,11 @@
 			<div class="relative">
 				<p class="text-white p-3 text-xl font-bold font-overpass">{title}</p>
 
-				<!-- This paragraph will be placed at the bottom -->
 				<div class="absolute bottom-0 text-white text-l p-3">
 					<div class="flex flex-row font-overpass font-light">
-						<i class="fa-solid fa-star text-yellow-400 m-1" />
+						<i class="fa-solid fa-star text-yellow-400 m-1"></i>
 						{score}
-						<i class="fa-solid fa-comment text-yellow-400 m-1" />
+						<i class="fa-solid fa-comment text-yellow-400 m-1"></i>
 						{NumberFormatter.formatWithCommas(scored_by)}
 					</div>
 				</div>
@@ -39,7 +45,6 @@
 	<div class="bg-zinc-700 w-auto h-64 rounded-md m-3 shadow-2xl">
 		<div class="flex flex-row">
 			<div class="flex w-36 h-64">
-				<!-- Set a fixed width, e.g., w-24 (adjust as needed) -->
 				<img
 					src={image_url}
 					alt=""
@@ -50,12 +55,11 @@
 			<div class="relative">
 				<p class="text-white p-3 text-xl font-bold font-overpass">{title}</p>
 
-				<!-- This paragraph will be placed at the bottom -->
 				<div class="absolute bottom-0 text-white text-l p-3">
 					<div class="flex flex-row font-overpass font-light">
-						<i class="fa-solid fa-star text-yellow-400 m-1" />
+						<i class="fa-solid fa-star text-yellow-400 m-1"></i>
 						{score}
-						<i class="fa-solid fa-comment text-yellow-400 m-1" />
+						<i class="fa-solid fa-comment text-yellow-400 m-1"></i>
 						{NumberFormatter.formatWithCommas(scored_by)}
 					</div>
 				</div>

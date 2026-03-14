@@ -1,11 +1,8 @@
 <script lang="ts">
 	import ItemCard from '$lib/components/ItemCard.svelte';
-
 	import type { PageData } from './$types';
 
-	export let data;
-	// @ts-ignore
-	const { seasonal_anime, upcoming_anime } = data;
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head>
@@ -15,7 +12,7 @@
 	<div class="flex flex-col px-32">
 		<h1 class="text-5xl text-white font-black my-8 mx-4 font-overpass">Seasonal Anime</h1>
 		<div class=" grid grid-cols-5 w-auto h-auto gap-4 mb-20 mx-4">
-			{#each seasonal_anime as anime}
+			{#each data.seasonal_anime as anime}
 				<a href="/anime/{anime.mal_id}">
 					<ItemCard
 						image_url={anime.images.jpg.large_image_url}
@@ -28,7 +25,7 @@
 		</div>
 		<h1 class="text-5xl text-white font-black my-8 mx-4 font-overpass">Upcoming Anime</h1>
 		<div class=" grid grid-cols-5 w-auto h-auto gap-4 mb-20 mx-4">
-			{#each upcoming_anime as anime}
+			{#each data.upcoming_anime as anime}
 				<a href="/anime/{anime.mal_id}">
 					<ItemCard
 						image_url={anime.images.jpg.large_image_url}

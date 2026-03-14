@@ -1,18 +1,23 @@
 <script lang="ts">
-	import RankingCard from '../../lib/components/RankingCard.svelte';
+	import RankingCard from '$lib/components/RankingCard.svelte';
 
-	export let data: {
-		top_manga: {
-			mal_id: number;
-			rank: number;
-			title: string;
-			images: { jpg: { large_image_url: string } };
-			score: number;
-			scored_by: number;
-			type: string;
-		}[];
-	};
-	let sortedTopManga = [...data.top_manga].sort((a, b) => a.rank - b.rank);
+	let {
+		data
+	}: {
+		data: {
+			top_manga: {
+				mal_id: number;
+				rank: number;
+				title: string;
+				images: { jpg: { large_image_url: string } };
+				score: number;
+				scored_by: number;
+				type: string;
+			}[];
+		};
+	} = $props();
+
+	let sortedTopManga = $derived([...data.top_manga].sort((a, b) => a.rank - b.rank));
 </script>
 
 <div class="bg-[#222]">

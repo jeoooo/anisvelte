@@ -1,20 +1,23 @@
 <script lang="ts">
 	import RankingCard from '$lib/components/RankingCard.svelte';
 
-	export let data: {
-		top_anime: {
-			mal_id: number;
-			rank: number;
-			title: string;
-			images: { jpg: { large_image_url: string } };
-			score: number;
-			scored_by: number;
-			type: string;
-		}[];
-	};
+	let {
+		data
+	}: {
+		data: {
+			top_anime: {
+				mal_id: number;
+				rank: number;
+				title: string;
+				images: { jpg: { large_image_url: string } };
+				score: number;
+				scored_by: number;
+				type: string;
+			}[];
+		};
+	} = $props();
 
-	// Create a computed property to sort the top anime by rank
-	let sortedTopAnime = data.top_anime.slice().sort((a, b) => a.rank - b.rank);
+	let sortedTopAnime = $derived(data.top_anime.slice().sort((a, b) => a.rank - b.rank));
 </script>
 
 <div class="bg-[#222]">

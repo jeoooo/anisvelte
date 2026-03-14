@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
-	let query = '';
-	let suggestions = [];
+	let query = $state('');
+	let suggestions = $state([]);
 
 	const RATE_LIMIT = 333; // 3 requests per second
 	let lastSearchTime = 0;
@@ -164,12 +164,12 @@
 							placeholder="Search..."
 							class="text-sm rounded-full bg-[#383838] h-[30px] px-[32px] w-[250px] border-none focus:ring-2 focus:ring-[#ff3e00] caret-[#ff3e00] text-white font-overpass font-light relative"
 							bind:value={query}
-							on:input={handleSearch}
-							on:focus={handleSearch}
+							oninput={handleSearch}
+							onfocus={handleSearch}
 						/>
 						<i
 							class="fa-solid fa-magnifying-glass absolute text-sm left-3 top-[14px] transform -translate-y-1/2 text-white"
-						/>
+						></i>
 
 						{#if suggestions.length > 0}
 							<ul
@@ -177,12 +177,10 @@
 							>
 								{#each suggestions as { mal_id, title, imageUrl, type }, index}
 									{#if index >= 5 && index < 10}
-										<!-- Limit the suggestions to be between 5 and 10 -->
-										<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-										<!-- svelte-ignore a11y-click-events-have-key-events -->
-
+										<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+										<!-- svelte-ignore a11y_click_events_have_key_events -->
 										<li
-											on:click={() => handleSuggestionClick(mal_id)}
+											onclick={() => handleSuggestionClick(mal_id)}
 											class="flex items-center px-4 py-2 cursor-pointer hover:bg-[#222222] w-[350px] rounded-lg"
 										>
 											<img
