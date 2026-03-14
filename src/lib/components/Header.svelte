@@ -79,8 +79,8 @@
 </script>
 
 <nav class="bg-[#2e2e2e] border-gray-200 dark:bg-gray-900">
-	<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-		<a href="/" class="flex items-center justify-between">
+	<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
+		<a href="/" class="flex items-center justify-between logo">
 			<span
 				class="inline-flex self-center text-2xl whitespace-nowrap font-overpass font-light text-white"
 			>
@@ -119,33 +119,33 @@
 		</button>
 		<div class="{mobileMenuOpen ? 'block' : 'hidden'} w-full md:block md:w-auto" id="navbar-default">
 			<ul
-				class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0"
+				class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg md:flex-row md:space-x-10 md:mt-0 md:border-0"
 			>
 				<li>
 					<a
 						href="/"
-						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
+						class="nav-link block py-2 pl-3 pr-4 font-overpass font-light text-white rounded md:hover:bg-transparent md:border-0 md:p-0"
 						aria-current="page">Anime</a
 					>
 				</li>
 				<li>
 					<a
 						href="/topAnime"
-						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
+						class="nav-link block py-2 pl-3 pr-4 font-overpass font-light text-white rounded md:hover:bg-transparent md:border-0 md:p-0"
 						>Top Anime</a
 					>
 				</li>
 				<li>
 					<a
 						href="/topManga"
-						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
+						class="nav-link block py-2 pl-3 pr-4 font-overpass font-light text-white rounded md:hover:bg-transparent md:border-0 md:p-0"
 						>Top Manga</a
 					>
 				</li>
 				<li>
 					<a
 						href="/about"
-						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
+						class="nav-link block py-2 pl-3 pr-4 font-overpass font-light text-white rounded md:hover:bg-transparent md:border-0 md:p-0"
 						>About</a
 					>
 				</li>
@@ -154,7 +154,7 @@
 						<input
 							type="text"
 							placeholder="Search..."
-							class="text-sm rounded-full bg-[#383838] h-[30px] px-[32px] w-full md:w-[250px] border-none focus:ring-2 focus:ring-[#ff3e00] caret-[#ff3e00] text-white font-overpass font-light relative"
+							class="search-input text-sm rounded-full bg-[#383838] h-[30px] px-[32px] w-full md:w-[250px] border-none focus:ring-2 focus:ring-[#ff3e00] caret-[#ff3e00] text-white font-overpass font-light relative"
 							bind:value={query}
 							oninput={handleSearch}
 							onfocus={handleSearch}
@@ -172,16 +172,16 @@
 									<!-- svelte-ignore a11y_click_events_have_key_events -->
 									<li
 										onclick={() => handleSuggestionClick(mal_id)}
-										class="suggestion-item flex items-center px-4 py-2 cursor-pointer hover:bg-[#222222] rounded-lg"
+										class="suggestion-item flex items-center px-4 py-3 cursor-pointer rounded-lg"
 									>
 										<img
 											src={imageUrl}
 											alt={title}
-											class="w-10 h-10 object-cover mr-2 rounded-md"
+											class="w-10 h-10 object-cover mr-3 rounded-md"
 										/>
 										<div class="flex flex-col">
 											<span class="font-overpass text-sm font-bold text-white">{title}</span>
-											<span class="font-overpass text-xs font-normal text-white"
+											<span class="font-overpass text-xs font-normal text-gray-400"
 												>{`Type: ${type}`}</span
 											>
 										</div>
