@@ -4,6 +4,7 @@
 
 	let query = $state('');
 	let suggestions = $state([]);
+	let mobileMenuOpen = $state(false);
 
 	const RATE_LIMIT = 333; // 3 requests per second
 	let lastSearchTime = 0;
@@ -37,7 +38,7 @@
 						imageUrl: item.images.jpg.small_image_url,
 						type: item.type
 					}))
-					.slice(0, 10);
+					.slice(0, 5);
 			} else {
 				console.error('Invalid API response format:', data);
 			}
@@ -58,7 +59,6 @@
 	}
 
 	function handleSuggestionClick(mal_id) {
-		console.log('Navigate to:', mal_id);
 		goto(`/anime/${mal_id}`);
 	}
 
@@ -94,11 +94,11 @@
 			>
 		</a>
 		<button
-			data-collapse-toggle="navbar-default"
 			type="button"
-			class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+			onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+			class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
 			aria-controls="navbar-default"
-			aria-expanded="false"
+			aria-expanded={mobileMenuOpen}
 		>
 			<span class="sr-only">Open main menu</span>
 			<svg
@@ -117,9 +117,9 @@
 				/>
 			</svg>
 		</button>
-		<div class="hidden w-full md:block md:w-auto" id="navbar-default">
+		<div class="{mobileMenuOpen ? 'block' : 'hidden'} w-full md:block md:w-auto" id="navbar-default">
 			<ul
-				class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0"
+				class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0"
 			>
 				<li>
 					<a
@@ -130,16 +130,9 @@
 				</li>
 				<li>
 					<a
-						href="/topManga"
-						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
-						aria-current="page">Manga</a
-					>
-				</li>
-				<li>
-					<a
 						href="/topAnime"
 						class="block py-2 pl-3 pr-4 font-overpass font-light text-white rounded hover:underline hover:underline-offset-2 hover:text-[#ff3e00] md:hover:bg-transparent md:border-0 md:p-0"
-						aria-current="page">Top Anime</a
+						>Top Anime</a
 					>
 				</li>
 				<li>
@@ -149,7 +142,6 @@
 						>Top Manga</a
 					>
 				</li>
-
 				<li>
 					<a
 						href="/about"
@@ -157,12 +149,12 @@
 						>About</a
 					>
 				</li>
-				<li>
+				<li class="mt-2 md:mt-0">
 					<div class="relative">
 						<input
 							type="text"
 							placeholder="Search..."
-							class="text-sm rounded-full bg-[#383838] h-[30px] px-[32px] w-[250px] border-none focus:ring-2 focus:ring-[#ff3e00] caret-[#ff3e00] text-white font-overpass font-light relative"
+							class="text-sm rounded-full bg-[#383838] h-[30px] px-[32px] w-full md:w-[250px] border-none focus:ring-2 focus:ring-[#ff3e00] caret-[#ff3e00] text-white font-overpass font-light relative"
 							bind:value={query}
 							oninput={handleSearch}
 							onfocus={handleSearch}
@@ -173,29 +165,27 @@
 
 						{#if suggestions.length > 0}
 							<ul
-								class="absolute left-0 mt-2 bg-[#2e2e2e] border border-gray-500 rounded-lg shadow-md z-10"
+								class="absolute left-0 mt-2 bg-[#2e2e2e] border border-gray-500 rounded-lg shadow-md z-10 w-full md:w-[350px]"
 							>
-								{#each suggestions as { mal_id, title, imageUrl, type }, index}
-									{#if index >= 5 && index < 10}
-										<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-										<!-- svelte-ignore a11y_click_events_have_key_events -->
-										<li
-											onclick={() => handleSuggestionClick(mal_id)}
-											class="flex items-center px-4 py-2 cursor-pointer hover:bg-[#222222] w-[350px] rounded-lg"
-										>
-											<img
-												src={imageUrl}
-												alt={title}
-												class="w-10 h-10 object-cover mr-2 rounded-md"
-											/>
-											<div class="flex flex-col">
-												<span class="font-overpass text-sm font-bold text-white">{title}</span>
-												<span class="font-overpass text-xs font-normal text-white"
-													>{`Type: ${type}`}</span
-												>
-											</div>
-										</li>
-									{/if}
+								{#each suggestions as { mal_id, title, imageUrl, type }}
+									<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+									<!-- svelte-ignore a11y_click_events_have_key_events -->
+									<li
+										onclick={() => handleSuggestionClick(mal_id)}
+										class="suggestion-item flex items-center px-4 py-2 cursor-pointer hover:bg-[#222222] rounded-lg"
+									>
+										<img
+											src={imageUrl}
+											alt={title}
+											class="w-10 h-10 object-cover mr-2 rounded-md"
+										/>
+										<div class="flex flex-col">
+											<span class="font-overpass text-sm font-bold text-white">{title}</span>
+											<span class="font-overpass text-xs font-normal text-white"
+												>{`Type: ${type}`}</span
+											>
+										</div>
+									</li>
 								{/each}
 							</ul>
 						{/if}

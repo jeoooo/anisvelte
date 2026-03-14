@@ -2,11 +2,11 @@
 	import { NumberFormatter } from '$lib/utils/NumberFormatter';
 
 	let {
-		rank = 111,
+		rank,
 		image_url = 'https://cdn.myanimelist.net/images/anime/1506/138982l.jpg',
 		title = 'title',
-		score: scoreProp = 4.5,
-		scored_by: scoredByProp = 12345,
+		score: scoreProp = 0,
+		scored_by: scoredByProp = 0,
 		type = 'seasonal'
 	}: {
 		rank?: number;
@@ -21,56 +21,45 @@
 	let scored_by = $derived(scoredByProp ?? 0);
 </script>
 
-{#if type == 'seasonal'}
-	<div class="flex flex-col h-auto w-fit rounded-md">
-		<div
-			class="flex flex-col w-fit rounded-t-md relative hover:scale-105 transition-transform duration-300 ease-in-out"
-		>
-			<div class="relative">
-				<div class="absolute m-2 bg-slate-600 opacity-80 rounded-md w-fit">
-					<h3 class=" text-white p-2">#{rank}</h3>
-				</div>
-				<!-- Actual image -->
-				<img
-					src={image_url}
-					alt=""
-					class="saturate-150 object-cover rounded-md w-[220px] h-[300px]"
-				/>
+<div
+	class="group relative w-full rounded-xl overflow-hidden bg-zinc-800 shadow-md
+	       hover:shadow-[0_8px_30px_rgba(0,0,0,0.6)] hover:-translate-y-1
+	       transition-all duration-300 ease-out"
+>
+	<div class="relative w-full h-[200px] sm:h-[260px] md:h-[300px] overflow-hidden">
+		<img
+			src={image_url}
+			alt={title}
+			class="w-full h-full object-cover saturate-150 group-hover:scale-105 transition-transform duration-500 ease-out"
+		/>
 
-				<!-- Opaque overlay with information below the image -->
-				{#if score != 0 && scored_by != 0}
-					<div
-						class="absolute inset-x-0 bottom-0 bg-[#222] opacity-80 rounded-b-md flex flex-row items-center p-2"
-					>
-						<i class="fa-solid fa-star text-yellow-400 mr-1"></i>
-						<p class="flex-grow text-white font-overpass font-light">{score}</p>
-						<i class="fa-solid fa-comment text-yellow-400 mr-1"></i>
-						<p class="text-white font-overpass font-light">
-							{NumberFormatter.formatWithCommas(scored_by)}
-						</p>
-					</div>
-				{/if}
+		<!-- Rank badge -->
+		{#if rank !== undefined}
+			<div
+				class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm rounded-md px-1.5 py-0.5"
+			>
+				<span class="text-white text-xs font-overpass font-semibold">#{rank}</span>
 			</div>
-		</div>
-		<div class="flex w-52">
-			<h1 class=" p-2 text-l text-white truncate text-ellipsis font-overpass font-light">
-				{title}
-			</h1>
-		</div>
-	</div>
-{:else if type == 'upcoming'}
-	<div class="flex flex-col h-auto w-fit rounded-md">
-		<div
-			class="flex flex-col w-fit rounded-t-md relative hover:scale-105 transition-transform duration-300 ease-in-out"
-		>
-			<div class="relative">
-				<img src={image_url} alt="" class="saturate-150 rounded-md w-[220px] h-[300px]" />
+		{/if}
+
+		<!-- Score overlay (seasonal only) -->
+		{#if type === 'seasonal' && score !== 0 && scored_by !== 0}
+			<div
+				class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent px-2.5 pb-2 pt-10"
+			>
+				<div class="flex items-center gap-1.5">
+					<i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+					<span class="text-white text-xs font-overpass font-semibold">{score}</span>
+					<span class="text-gray-400 text-xs font-overpass">
+						({NumberFormatter.formatWithCommas(scored_by)})
+					</span>
+				</div>
 			</div>
-		</div>
-		<div class="flex w-52">
-			<h1 class=" p-2 text-l text-white truncate text-ellipsis font-overpass font-light">
-				{title}
-			</h1>
-		</div>
+		{/if}
 	</div>
-{/if}
+
+	<!-- Title -->
+	<div class="px-2.5 py-2">
+		<h3 class="text-white text-xs sm:text-sm font-overpass leading-snug line-clamp-2">{title}</h3>
+	</div>
+</div>
