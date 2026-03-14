@@ -50,26 +50,14 @@
 </svelte:head>
 
 <div class="bg-[#111] min-h-screen">
-	<!-- Hero: cover art anchored right at natural proportions, fading into dark -->
-	<div class="relative w-full h-96 md:h-[36rem] overflow-hidden bg-[#111]">
-		<!-- Background pattern for visual interest -->
-		<div class="absolute inset-0 opacity-5">
-			<div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, #ff3e00 1px, transparent 0); background-size: 40px 40px;"></div>
-		</div>
-		
-		<!-- Cover art: full height, auto width, anchored to right edge with floating animation and shadow -->
-		<div class="absolute right-0 top-0 h-full w-auto animate-float">
-			<img
-				src={anime.images.jpg.large_image_url ?? anime.images.jpg.image_url}
-				alt=""
-				class="h-full w-auto object-cover"
-				aria-hidden="true"
-				style="filter: drop-shadow(-8px 0 24px rgba(0, 0, 0, 0.6));"
-			/>
-		</div>
-		
-		<!-- Left-to-right fade: dark left bleeds into cover art with improved gradient -->
-		<div class="absolute inset-0 bg-gradient-to-r from-[#111] via-[#111]/90 via-[#111]/75 to-transparent"></div>
+	<!-- Hero: cover image as background with gradient overlays -->
+	<div
+		class="relative w-full h-96 md:h-[36rem] overflow-hidden bg-cover bg-center bg-no-repeat"
+		style="background-image: url('{anime.images.jpg.large_image_url ?? anime.images.jpg.image_url}');"
+	>
+		<!-- Gradient overlays for text readability -->
+		<div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/70 to-[#111]/40"></div>
+		<div class="absolute inset-0 bg-gradient-to-r from-[#111]/90 via-[#111]/50 to-[#111]/40"></div>
 		<!-- Bottom fade into page -->
 		<div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/50 to-transparent"></div>
 		<!-- Top fade for better text readability -->
@@ -256,20 +244,6 @@
 </div>
 
 <style>
-	@keyframes float {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-12px);
-		}
-	}
-
-	.animate-float {
-		animation: float 6s ease-in-out infinite;
-	}
-
 	@keyframes fadeInUp {
 		from {
 			opacity: 0;
@@ -306,7 +280,6 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.animate-float,
 		.animate-fade-in-up-1,
 		.animate-fade-in-up-2,
 		.animate-fade-in-up-3,

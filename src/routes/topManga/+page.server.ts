@@ -1,6 +1,16 @@
-import { fetchWithCache, JIKAN_URLS } from '$lib/api';
+import { fetchWithCache } from '$lib/api';
+import type { PageServerLoad } from './$types';
 
-export const load = async () => {
-	const data = await fetchWithCache(JIKAN_URLS.TOP_MANGA);
-	return { top_manga: data.data };
+export const load: PageServerLoad = async ({ url }) => {
+	const page = Math.max(1, Number(url.searchParams.get('page')) || 1);
+	const apiUrl = `https://api.jikan.moe/v4/top/manga?type=manga&limit=25&page=${page}`;
+	const data = await fetchWithCache(apiUrl);
+	return {
+		top_manga: data.data,
+		pagination: data.pagination as {
+			last_visible_page: number;
+			has_next_page: boolean;
+			current_page: number;
+		}
+	};
 };
