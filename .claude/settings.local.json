@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(find /c/Users/Jeo/Desktop/anisvelte/src -type f | grep -E \"\\\\.\\(svelte|ts|js|css\\)$\" | sort)"
+    ]
+  }
+}
